@@ -1,0 +1,65 @@
+\documentclass[a4paper,reqno]{article}
+
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtext}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{cmap}
+\usepackage{bbm}
+\usepackage{tikz}
+
+% Types
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{prop}{Утверждение}
+\newtheorem{col}{Следствие}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+
+\theoremstyle{definition}
+\newtheorem{example}{Пример}
+
+\theoremstyle{definition}
+\newtheorem{nb}{Замечание}
+
+\newcommand{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\ensuremath{#1}}}{}}
+\newcommand{\nn}{\nonumber}
+\DeclareMathOperator{\sgn}{sign}
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\var}{var}   
+\DeclareMathOperator*{\Var}{Var}     
+\DeclareMathOperator*{\cov}{cov}
+
+\newcommand{\1}{\mathbbm{1}} %Indicator: \1 (X<5)
+\newcommand{\Co}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{P}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
+\numberwithin{lemma}{section}
+\numberwithin{prop}{section}
+\numberwithin{col}{section}
+\numberwithin{definition}{section}
+\numberwithin{example}{section}
+\numberwithin{nb}{section}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+\date{Весенний семестр 2021}
+\title{Курс <<Теория вероятностей>>}
+\author{Александр Вадимович Булинский}

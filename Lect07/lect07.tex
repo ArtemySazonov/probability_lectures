@@ -1,0 +1,163 @@
+\section{Интеграл Лебега}
+
+    \subsection{Построение интеграла Лебега по вероятностной мере}
+    
+    Пусть $(\Omega,\mathcal{F},P)$ -- вероятностное пространство, $X:\Omega\to\mathbb{R}$.
+    
+    \subsubsection{Интеграл для простых функций}
+    
+    \begin{definition}\label{lect07:def1}
+        Случайная величина $X$ называется простой, если\\ $X(\omega) = \sum\limits_{i=1}^{n}a_i\1_{A_i}(\omega)$, где $a_i \in\mathbb{R}$, а непустые $A_i$ образуют разбиение $\Omega$. 
+    \end{definition}
+
+    \begin{definition}\label{lect07:def2}
+        Интегралом Лебега от простой случайной величины $X$, задаваемой формулой $X = \sum\limits_{i=1}^{n}a_i\1 (A_i)$, называется число $\int\limits_{\Omega}X dP = \sum\limits_{i}a_iP(A_i)$. В теории вероятностей интеграл Лебега по вероятностой мере принято обозначать $\E X$.
+    \end{definition}
+    
+    \begin{example}
+        Есть $N$ лотерейных билетов, причём на $m_1,\ldots,m_n$ из них приходятся соответственно выигрыши $a_1,\ldots,a_n$. Разыгрывается денежная сумма $S=a_1 m_1+\ldots+a_n m_n$. Тогда средний выигрыш, приходящийся на 1 билет, равен $\frac{S}{N}$, т.е. $a_1\frac{m_1}{N}+\ldots+a_n\frac{m_n}{N} = a_1 p_1 +\ldots+ a_n p_n$, где $p_i = \frac{m_i}{N}$.
+    \end{example}
+    
+    \begin{example}
+        Пусть на прямой в точках $x_1,\ldots,x_n$ сосредоточены массы $p_1,\ldots,p_n$. Тогда центр тяжести этой системы $\bar x = \frac{x_1 p_1+\ldots+x_n p_n}{p_1+\ldots+p_n}$.
+    \end{example}
+    
+    \begin{example}
+        Если $X = c$, то $\E X = c$. Если $X = \1 (A)$, то $\E X = P(A)$. Таким образом, для бернуллиевской сл.в. с параметром $p$ $\E X = p$.
+    \end{example}
+    
+    \begin{prop}\label{lect07:prop1}
+        Определение интеграла Лебега для простых случайных величин корректно, т.е. если $X=\sum\limits_{i=1}^{n} a_i \1 (A_i) =\sum\limits_{i=1}^{m} b_i \1 (B_i)$, то\\ $\sum\limits_{i=1}^{n} a_i P(A_i) = \sum\limits_{i=1}^{m} b_i P(B_i)$.
+    \end{prop}
+    \begin{proof}
+        \begin{align*}
+            &X=\sum\limits_{i=1}^{n}\left(a_i \sum\limits_{j=1}^{m} \1 (A_i B_j) \right) = \sum\limits_{j=1}^{m}\left(b_j \sum\limits_{i=1}^{n} \1 (A_i B_j) \right) = \sum\limits_{(i,j)\in J} c_{ij} \1 (C_{ij}), \\ &C_{ij}=A_i B_j, c_{ij} = a_i = b_j \quad \forall (i,j): C_{ij}\neq\varnothing.
+        \end{align*}
+        \begin{multline*}
+            \sum\limits_{i=1}^{n} a_i P(A_i) = \sum\limits_{i=1}^{n}\left( a_i \sum\limits_{j=1}^{m} P(A_i B_j) \right) = \sum\limits_{(i,j)\in J} a_i P(C_{ij})=\\=\sum\limits_{(i,j)\in J} b_j P(C_{ij})=\sum\limits_{j=1}^{m}\left( b_j\sum\limits_{i=1}^{n} P(A_i B_j)\right)=\sum\limits_{j=1}^{m} b_j P(B_j)
+        \end{multline*}
+    \end{proof}
+    
+    \begin{theorem}\label{lect07:th1}
+        Пусть $X,Y$ -- простые сл.в. Тогда:
+        \begin{enumerate}
+            \item $\E(cX) = c\E X$
+            \item $\E (X+Y) = \E X +\E Y$
+            \item Если $X\ge 0$, то $\E X \ge 0$
+            \item Если $Y\le X$, то $\E Y \le \E X$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item Очевидно, т.к. $cX$ принимает на $A_i$ значение $ca_i$.
+            \item Если $X,Y$ допускают запись в виде линейной комбинации событий, образующих разбиение $\Omega$, то утверждение тривиально. В общем случае переходим к разбиению $A_i B_j$ как в доказательстве \ref{lect07:prop1}.
+            \item Очевидно из определения
+            \item $\E (Y-X) = \E (Y+(-X)) = \E Y - \E X$. $Y-X\le 0 \implies \E Y \le \E X$.
+        \end{enumerate}
+    \end{proof}
+    
+    \begin{col}\label{lect07:col1}
+        Если $\alpha,\beta\in\mathbb{R}$, а $X,Y$ -- пр.сл.в., то $\E (\alpha X+\beta Y) = \alpha\E X+\beta\E Y$.
+    \end{col}
+    
+    \subsubsection{Интеграл для знакопостоянных функций}
+    
+    \begin{definition}\label{lect07:def3}
+        Для сл.в. $X\ge 0$ определим $\E X$ так:\\ $\E X = \sup\{\E Y: 0\le Y\le X, Y$ -- пр.сл.в.$\}$
+    \end{definition}
+    
+    \begin{lemma}\label{lect07:lemma1}
+        Пусть сл.в. $X\ge 0$. Тогда найдётся последовательность пр.сл.в. $X_n$ таких, что $0\le X_n \uparrow X$.
+    \end{lemma}
+    \begin{proof}
+        Для $ n\in\N, \omega\in\Omega $ определим 
+        $$ 
+        X_n (\omega) = \begin{cases}
+        k2^{-n},&\text{если $k2^{-n}\le X_n(\omega) < (k+1)2^{-n}, k=0,\ldots,n2^{n}-1$}\\
+        n,&\text{если $X(\omega)\ge n$}
+        \end{cases}
+        $$
+        
+        Это же можно записать более лаконично:
+        $$
+            X_n=\min\left(2^{-n}[2^n X],n\right)
+        $$
+        
+        Несложно убедиться, что такая последовательность является искомой.
+    \end{proof}
+    
+    \begin{lemma}\label{lect07:lemma2}
+        Пусть сл.в. $X\ge 0$. Тогда для любой последовательности простых функций $(X_n)_{n\in\N}$ таких, что $0\le X_n\uparrow X$ верно соотношение $\E X = \lim\limits_{n\to\infty}{\E X_n}$.
+    \end{lemma}
+    \begin{proof}
+        Обозначим $a=\lim\limits_{n\to\infty}{\E X_n}$. $\E X_n \le \E X_{n+1} \le \E X \implies a\le\E X$. Покажем, что $a\ge\E X$. Иначе говоря, убедимся, что $\E Y\le a$ для любой пр.сл.в $Y$ такой, что $0\le Y\le X$. Пусть $Y$ принимает значения $0=b_0,b_1,\ldots,b_k$ с вероятностями $p_0,\ldots,p_k$ соответственно. Если $Y\equiv 0$, то утверждение очевидно.
+        
+        Введём $B_i = \{Y=b_i\}, i=0,\ldots,k$. Тогда $\E Y = \sum\limits_{i=1}^{k} b_i P(B_i)$. Возьмём $\eps\in(0,1)$, и определим сл.в. $Y_n = (1-\eps)Y \1 ((1-\eps)Y\le X_n)$. Тогда $Y_n\equiv 0$ на событии $B_0 = \{Y=0\}$, а для $1\le i\le k$ на $C_{i,n}=B_i\cap\{ (1-\eps)Y\le X_n\}$ имеем $Y_n = (1-\eps)Y = (1-\eps)b_i$.
+        
+        Итак, $Y_n\le X_n$, значит, $\E Y_n\le\E X_n\le a$. $X_n\uparrow X \implies C_{i,n}\uparrow B_i$. Таким образом, $\E Y_n = (1-\eps)\sum\limits_{i=1}^{k}b_i P(C_{i,n})$, а это стремится к $(1-\eps)\sum\limits_{i=1}^{k}b_i P(B_i) = (1-\eps)\E Y\le a$. Так как $\eps$ был произвольный, можем написать $\E Y\le a$.
+    \end{proof}
+    
+    \begin{col}\label{lect07:col2}
+        Пусть даны сл.в. $X,Y\ge 0$, $c>0$. Тогда $\E (cX) = c\E X$, а $\E (X+Y) = \E X + \E Y$.
+    \end{col}
+    \begin{proof}
+        Возьмём $X_n, Y_n$ из леммы, их сумма будет приближать $X+Y$.
+    \end{proof}
+    
+    \subsubsection{Интеграл для измеримых функций}
+    \begin{definition}\label{lect07:def4}
+        $X:\Omega\to\mathbb{R}$. Тогда $X=X^{+}-X^{-}$, где $X^{+}=X\1 (x\ge 0)$, $X^{-}=-X\1 (x<0)$. Положим $\E X = \E X^{+} - \E X^{-}$. Если $\E X\in\mathbb{R}$, то говорят, что $X$ интегрируема, или что $X\in L^1$.
+    \end{definition}
+    
+    \begin{nb}
+        $\E X$ не определено, если $\E X^{+}=\E X^{-}=+\infty$.
+    \end{nb}
+    
+    \begin{nb}
+        Будем считать, что $\forall c\in\mathbb{R}$ $\infty -c=\infty, c-\infty =-\infty$.
+    \end{nb}
+    
+    \begin{definition}\label{lect07:def5}
+        Если $A\in\mathcal{F}$, то
+        $$
+            \int\limits_{A}X dP := E(X\1 (A)) = \int\limits_{\Omega}X\1 (A) dP
+        $$
+        Обозначается $\E (X;A)$
+    \end{definition}
+    
+    \begin{nb}
+        Если $P(X=\infty)\neq 0$, то $\E X=\infty$. Действительно, достаточно взять $X_n = n\1 (X=\infty)\le X$.
+    \end{nb}
+    
+    \begin{nb}
+        Если $\E |X|<\infty$, то $|X|<\infty$ на $\Omega '$ и $P(\Omega ') = 1$. В таком случае говорят, что $|X|<\infty$ почти наверно (п.н.).
+    \end{nb}
+    
+    \subsection{Свойства математического ожидания}
+    
+    \begin{theorem}\label{lect07:th2}
+        Справедливы следующие утверждения:
+        \begin{enumerate}
+            \item Если $0\le Y\le X$ и $X\in L^1$, то $Y\in L^1$
+            \item $X\in L^1\iff |X|\in L^1$, причём $|\E X|\le \E |X|$
+            \item $L^1$ -- линейное пространство
+            \item $\E$ -- линейный функционал на $L^1$
+            \item Если $X,Y\in L^1$ и $X\le Y$, то $\E X\le\E Y$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item Если $0\le Z\le Y$, то $Z\le X$, и когда возьмём супремум оценка сохранится.
+            \item Пусть $|X|\in L^1$. Понятно, что $X^{+}\le |X|$ и $X^{-}\le |X|$, значит,\\ $X^{+},X^{-}\in L^1$, и $X\in L^1$.
+            
+            Обратно, пусть $X\in L^1$, т.е. $X^{+},X^{-}\in L^1$. Тогда $|X|=X^{+}+X^{-}\in L^1$ (по \ref{lect07:col2}).
+            
+            Если $X\in L^1$, то $|\E X|=|\E X^{+}+\E X^{-}|\le |\E X^{+}|+|\E X^{-}| = \E X^{+} + \E X^{-} = \E |X|$.
+            \item Пусть $X,Y\in L^1$,$\alpha,\beta\in\mathbb{R}$. Тогда $|\alpha X+\beta Y|\le |\alpha||X|+|\beta||Y|$.
+            В силу \ref{lect07:col2} и первых двух пунктов получаем, что $\alpha X+\beta Y \in L^1$, значит, $L^1$ -- линейное пространство.
+            \item Пусть $X,Y\in L^1$. Покажем, что $\E (X+Y)=\E X+\E Y$. Надо проверить, что $\E (X+Y)^{+}-\E (X+Y)^{-}=\E X^{+}-\E X^{-}+\E Y^{+}-\E Y^{-}$. Все эти мат. ожидания конечны. Нужное нам равенство получается из равенства просто для чисел: $(x+y)^{+}+x^{-}+y^{-}=(x+y)^{-}+x^{+}+y^{+}$. 
+            
+            То, что $\E (cX) = c\E X$, доказывается просто (рассмотреть случаи, когда $c\ge 0$ и $c<0$.
+            \item $0\le Y-X\implies 0\le\E (Y-X)=\E Y -\E X$
+        \end{enumerate}
+    \end{proof}

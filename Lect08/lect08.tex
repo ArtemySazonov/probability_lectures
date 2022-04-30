@@ -1,0 +1,197 @@
+\section{Свойства интеграла Лебега}
+	\begin{theorem}\label{lect8:th1}
+		(Неравенство Маркова) 
+		Пусть неубывающая функция $f :\R_{+} \to \R_{+}$.
+		 
+		Тогда для любой случайной величины X и $\forall t \geq 0 $ верно неравенство: $Ef(|x|) \geq f(t)P(|x| \geq 0)$ 
+		 
+		Если $f(t) > 0$, то	$P(|x|\geq t) \leq \frac{Ef(|x|)}{f(t)}$.
+		 
+		В частности, если $f(t) = t^u, t \geq 0, u \geq 0$ : $P(|x| \geq t) \leq \frac{E|x|^u}{t^u}$
+		 
+		Для $f(t) = exp{(\lambda t)}, t \geq 0, \lambda \geq 0$ : $P(|x| \geq t) \leq e^{-\lambda t}E exp{\lambda|x|}$ 
+		 
+		Если $Ef(|x|) = \infty$, то неравенство тривиально.
+	\end{theorem}
+	\begin{proof}
+		При $t \geq 0$ имеем $x \geq t \implies f(x) \geq f(t)$. 
+ 		Следовательно $f(|x|) \geq f(|x|) I(|x| \geq t)$ так как индикатор принимает только два значения 0 и 1. В свою очередь, $f(|x)| I(|x| \geq t) \geq f(t) I(|x| \geq t)$. 
+ 		Теперь берем математическое ожидание : $E f(|x|) \geq E f(t) I(|x| \geq t) = $(выносим константу из-под знака математического ожидания) $= f(t)P(|x| \geq t)$ так как мат. ожидание от индикатора - вероятность того события, которое характеризует индикатор. 
+	\end{proof}
+	\begin{lemma}\label{lect8:lemma1}
+		Если $x \in L^1 $(то есть величина имеет конечное математическое ожидание), то :
+		\begin{enumerate}
+			\item $E|x|= 0 \iff x = 0 $почти наверное
+			\item Если случайная величина $Y : Y = X$ почти наверное, то $Y \in L^1 $ и $EY = EX$
+		\end{enumerate}
+	\end{lemma}	
+	\begin{proof}
+		\begin{enumerate}
+		\item $X = 0$ почти наверное $\iff |X| = 0$ почти наверное, поэтому далее достаточно рассмотреть только $x \geq 0$. 
+		  
+		 Берем последовательность $0 \leq X_n \nearrow x$ (такая последовательность уже была построена: $[2^n]$)
+		 Тогда : 
+		 $C = ( w : x(w) = 0) \subset (X_n = 0)  =  (x \in [0, 2^{-n}])$  
+		 
+		По условию $P(C) = 1$, получается, что $EX_n = 0$ для каждой такой аппроксимирующей последовательности (потому что все значения, кроме нулевого эта величина $X_n$ принимает с вероятностью нуль, а нулевое с вероятностью 1)
+		 
+		Значит $EX = \lim EX_n = 0$.
+		Если $E|x| = 0$, то $P(|x| > 0)$ событие $(x > 0) = \cup (|x| \geq \frac{1}{n})$
+		Значит по субаддитивности вероятностей $P(|x| > 0) \leq \sum\limits_{i=1}^n (P|x| \geq \frac{1}{n}) $ (применяем нер-во Маркова) $\leq \sum\limits_{i=1}^n \frac{E(x)}{\frac{1}{n}}$ (суммируем) $=0$
+		 
+		Отсюда получаем, что $|x| = 0$ почти наверное.
+		\item Заметим, что если $Y = X \rightarrow Y - X = 0$ почти наверное.
+		Теперь $Y = (Y - X) + X$, но $Y - X = 0$ п.н., а $X \in L^1$. 
+		 
+		Если величина равна нулю почти наверное, то она интегрируема и ее математическое ожидание равно нулю.
+		Значит $EY = E(Y - X) + EX = EX$.
+		\end{enumerate}	
+	\end{proof}	
+	 
+	\subsection{Предельный переход под знаком интеграла Лебега.}
+	 
+	\begin{theorem}\label{lect8:th2}
+	(Леви, о монотонной сходимости)
+	Пусть даны случайные величины $X_n$ (необязательно простые такие, что $0 \leq X_n \nearrow x$ при $n \rightarrow \infty$). Тогда $EX_n \nearrow EX, n \rightarrow \infty$ 
+	\end{theorem}
+	\begin{proof}
+		Очевидно, $EX_n \leq EX \forall n$ (так как $X_n$ не убывая сходятся к X, а для мат. ожиданий тот же знак нер-ва).
+		 
+		Неубывающая последовательность всегда имеет предел, значит $\exists \lim_{n} EX_n \leq EX$ 
+		$\forall n \in \N$ построим простые неотрицательные случайные величины $Y_{n,k} \nearrow X_n, k \rightarrow \infty$.
+		 
+		Определим $Z_k :=\max(Y_{n,j}) $ (максимум по $1 \le n,j \le k$), получаем неубывающую последовательность простых случайных величин.
+		 
+		Следовательно, $Z_k \nearrow z$. 
+		Итак на $\Omega$ $\forall k \in \N$, $n = 1,...,k$ справедливо нер-во:
+		 
+		$0 \le Y_{n,k} \le Z_k \le X_k \le x$. 
+		 
+		Берем предел при $k \rightarrow \infty$. Тогда :
+		 
+		$0 \le X_n \le z \le x$.
+		 
+		Берем предел при $n \rightarrow \infty$. Тогда $z = k$.
+		Тогда $Z_k \nearrow z = x$ и $Z_k \le X_k$. Получаем $EZ_k \le EX_k, \forall k \in \N$, значит $Ex =\lim\limits_{n} EZ_k \le \lim\limits_{n} EX_n $ 
+	\end{proof}
+	\begin{col}\label{lect8:col1} Выполняются следующие два утверждения: 
+		\begin{enumerate}
+		\item Пусть сл. в. $X_n \ge 0, \forall n \in \N$. Тогда $E(\sum\limits_{n = 1}^{\infty} X_n) = \sum\limits_{n =1}^{\infty} EX_n$.      (*)
+		\item Если сл. в. $X_n$ таковы, что $\sum\limits_{n = 1}^{\infty} E|X_n| \le \infty$. Тогда ряд $\sum\limits_{n = 1}^{\infty} |X_n|$ сходится п.н. и выполнено соотношение (*).
+		\end{enumerate}
+	\end{col}
+	\begin{proof}
+		\item Введем $S_n := \sum\limits_{n = 1}^{\infty} X_n $. Тогда $S_n \nearrow S = (\sum\limits_{k = 1}^{\infty} X_k, n \rightarrow \infty$. Поэтому утверждение (1) вытекает из т. о монотонной сходимости.
+		\item  (Упражнение. Надо рассмотреть $T_n := (\sum\limits_{k = 1}^{n} |X_k|$  $\nearrow T := (\sum\limits_{k = 1}^{\infty} |X_k|, n \rightarrow \infty $, а дальше введем $S_n(+) := (\sum\limits_{k = 1}^{n} X_k^+)$ и $S_n(-) = (\sum\limits_{k = 1}^{\infty} X_k^-$. Используя эти вспомогательными величинами и пользуясь $0 \le |X_k^+| \le |X_k|$ и $0 \le |X_k^-| \le |X_k|$, можно доказать)
+	\end{proof}	
+	
+	\begin{lemma}\label{lect8:lemma2}
+	 Утверждение теоремы о монотонной сходимости сохранится, если рассмотреть последовательность $X_n$ : $Y \le X_n \nearrow x, EY > -\infty$. (Если Y = 0, то получаем теорему о монотонной сходимости)	
+	\end{lemma}
+	
+	\begin{lemma}\label{lect8:lemma3}
+		(Фату) Пусть $X_n$ и Y сл.в., такие что $X_n \ge Y \forall n \in \N$, причем $EY > -\infty$. Тогда:
+		\begin{enumerate}
+	\item $E(\liminf\limits_{n \rightarrow \infty}X_n \le \liminf\limits_{n \rightarrow \infty} EX_n)$.
+	\item Если $X_n \le Y \forall n$, причем $EY < \infty$, то $limsup EX_n \le E(limsup X_n)$
+		\end{enumerate}	
+		
+	\end{lemma}
+	\begin{proof}
+		
+		\begin{enumerate}
+		\item Положим $x:= \liminf\limits_{n \rightarrow \infty}X_n = \lim\limits_{k \rightarrow \infty} \inf\limits_{k \ge n} X_k$.
+		Тогда $Y \le Y_n := \inf\limits_{k \ge n} X_k \nearrow x, k \rightarrow \infty$. Пользуясь упражнением, получаем $EX = \lim\limits{n} EY_n$. Для $k \ge n$ имеем $Y_n \ge X_k$. Отсюда вытекает, что $EY_n \le EX_k$. Следовательно $EY_n \le \inf\limits{k \ge n}EX_k$, что влечет утверждение 1). 
+		\item  $-X_n \ge -Y$,и тогда $E(-Y) > -\infty$. (к величинам $-X_n$ применяем пункт 1)
+		\end{enumerate}
+	\end{proof}	
+	
+	\begin{theorem}\label{lect8:th3}
+	(Лебег, о мажорируемой сходимости)	Пусть $x, X_n, Y$ - сл.в. такие, что $X_n \rightarrow x$ при $n \rightarrow \infty$ (на всем $\Omega$) и $|X_n| \le Y$, где $Y \in L^1$. Тогда $x \in L^1$ и $EX_n = \lim\limits{n} EX_n$. 	
+	\end{theorem}
+	\begin{proof}
+	Имеем $|X_n| \le Y$, где $Y \le L^1$. Поэтому $-Y \le X_n \le Y$.
+	 
+	 Значит $Y, -Y \in L^1$. По лемме Фату $E(\lim\limits_{n}\inf X_n) \le \lim\limits_{n}\inf EX_n \le \lim\limits_{n}\sup EX_n \le E(\lim\limits_{n}\sup X_n)$. По условию $x = \lim X_n = lim sup X_n$. Отсюда получаем искомое утверждение.	
+	\end{proof}
+	
+	\subsection{Переход к интегрированию по новому пространству}
+	
+	\begin{theorem}\label{lect8:th4}
+	Пусть $(S,\mathcal{B})$ измеримое пространство. $X : \Omega \to S$, $X \in F|\mathcal{B}$. Если $h : S \to \R$, $h \in \mathcal{B}|\mathcal{B}(\R)$, то 
+	тогда :
+	 
+	$Eh(x) = \int\limits_{\Omega} h(xX(w))P(dw) = \int\limits_{S}h(X)P_X(dx)$, где $P_X$ -распределение случайного элемента X. Точнее говоря, если существует хотя бы один интеграл  по $\Omega$ или по S, то существует и другой, при этом выполняется равенство.
+	\end{theorem}	
+	\begin{proof}
+		Пусть в начале $h(x) = \1_{\mathcal{B}} (x)$, $B \in \mathcal{B}, x \in S$. Тогда $h(X(w)) = 1$ для $w \in X^{-1}(\mathcal{B})$ и h(X(w)) = 0 в остальных случаях. 
+		 
+		Поэтому $Eh(x) = P(X^{-1}(B)) = P_X(B)= \int\limits_{S} \1_{\mathcal{B}}(x)P(dx)$. Пользуясь свойством линейности интеграла видим, что утверждение теоремы справедливо для $\forall$ простой функции $h : S \to \R (h \in \mathcal{B}|\mathcal{B}(\R))$.
+		Пусть $h \ge 0$. Возьмем последовательность простых функций $h_n : S \to \R$ таких, что $h_n \nearrow h$. По теореме о монотонной сходимости Eh(x) = $\lim\limits_{n \to \infty} Eh_n(x) = \lim\limits{n} \int\limits_{S} h_n(x)P_X(dx) = \int\limits_{S}  (x)P_X(dx)$ (тоже по т. о монотонной сходимости). Этот результат можем применить к $h^+$ и $h^-$. Получаем $Eh^+(x) = \int\limits_{S} h^+(x)P_X(dx)$,  $Eh^-(x) = \int\limits_{S} h^-(x)P_X(dx)$.   
+	\end{proof}	
+	
+	\subsection{$L^P(\Omega, F, P), p > 0$}
+	Рассмотрим сл. в. X : $E|x|^p < \infty$. Обозначим $\tilde{x}$ класс случайных величин, таких что они равны почти наверное. X и Y входят в один класс, если X = Y пости наверное. Возникает отношение эквивалентности.
+	 
+	Если X $\sim$ Y и $X \in L^1$ , то $Y \in L^1 $ и $EY = EX$.
+	$L^1(\Omega, F, P)$ состоит из классов эквивалентных сл. величин, которые входят в $L^1 = L^1(\Omega, F, P)$.
+	 
+	Аналогично $L^P(\Omega, F, P)$ состоит из классов эквивалентных функций таких, что $|x|^p \in L^1$
+	 
+	Замечание. Пусть $Y \le X_n \nearrow x$ почти наверное при $n \to \infty$ и $X_n \le X_{n+1}$ почти наверное. Если  $EY > -\infty$, тогда $ EX_n \nearrow Ex$.
+	
+		\begin{lemma}\label{lect8:lemma4}
+			(КБШ) Пусть $H$ - гильбертово пространство со скалярным произведением $(\cdot,\cdot)$ и нормой $\left\|x\right\|:=\sqrt{(x,x)}$.
+			Тогда $\forall x,y \in H$ верно нер-во:
+			$|(x, y)| \le ||x||||y||$.	
+		\end{lemma}
+	
+		\begin{proof}
+			$\forall t \in \R$ ,пользуясь симметрией и билинейностью скалярного произведения, имеем 
+			(tx + y,tx + y) = $t^2(x,x) + 2t(x, y) + (y, y) \ge 0$
+			$(x,y)^2 - (x,x)(y,y) \le 0$ 	
+		\end{proof}	
+		
+		Пространство  $L^2(\Omega, F, P)$ является гильбертовым со скалярным произведением $(X, Y) = \int\limits_{\Omega}XY dp = E(XY)$.
+		Таким образом $|E(XY)| \le \sqrt{Ex^2Ey^2}$.
+		
+		\subsection{Математатическое ожидание произведения независимых случайных величин}
+		
+		\begin{theorem}\label{lect8:th5}
+			Пусть X и Y интегрируемые независимые сл. в.. Тогда $(XY) \in L^1$ и $EX \cdot EY$.
+		\end{theorem}
+		\begin{proof}
+			Пусть в начале X и Y неотр. сл. в. 
+			 
+			Возьмем	$X_n \nearrow X$ и $Y_n \nearrow Y$, причем $X = \sum\limits_{k = 1}^{N_n} a_{n,k} \1_{X \in B_{n,k}}$ и $Y = \sum\limits_{k = 1}^{M_n} b_{n,k} \1_{Y \in C_{n,m}}$.
+			$B_{n,k} , C_{n,k}$ попарно непересекающиеся борелевские подмножества.
+			 
+			Тогда $E X_n\cdot Y_n = \sum\limits_{k = 1}^{N_n}\sum\limits_{m = 1}^{M_n}a_{n,k}b_{n,m}E(\1_{X \in B_{n,k}}\cdot \1_{Y \in C_{n,m}}) = \sum\limits_{k = 1}^{N_n}\sum\limits_{m = 1}^{M_n}a_{n,k}b_{n,m} P(X \in B_{n,k},Y \in C_{n,m}) $ = (в силу независимости) = $\sum\limits_{k = 1}^{N_n}\sum\limits_{m = 1}^{M_n}a_{n,k}b_{n,m}P(X \in B_{n,k})P(Y \in C_{n,m}) =\sum\limits_{k = 1}^{N_n}a_{n,k}P(X \in B_{n,k})  \sum\limits_{m = 1}^{M_n}b_{n,m}P(Y \in C_{n,m}) = EX_n \cdot EY_n$	
+			 
+			Очевидно  $0 \le X_nY_n \nearrow XY$. Поэтому по теореме о монотонной сходимости $EX_n \cdot EY_n \nearrow EX\cdot EY$, а кроме того $E(X_nY_n) \nearrow EX\cdot EY$. Теперь для неотрицательных величин все доказано.
+			 
+			Если $X = X^{+}- X^{-}$, $Y = Y^{+}- Y^{-}$, тогда $E(XY) =( X^{+}- X^{-})(Y^{+}- Y^{-}) = E(X^{+}Y^{+}) - E(X^{+}Y^{-}) - E(X^{-}Y^{+} + E(X^{-}Y^{-}) $ = [Если $X, Y \in L^1 \to X^{+}, X^{-}, Y^{+},Y^{-} \in L^1$.] = $(EX^{+} - EX^{-})(EY^{+} - EY^{-})$ (достаточно заметить, что $E(X^{+}Y^{+}) = E(X^{+})E(Y^{+})$ и пользуемся, что из независимости X и Y следует независимость $X^{+} и Y^{+}$ и т.д. (Борелевские функции от независимых случайных величин - независимы))
+		\end{proof}	
+			
+			
+			\subsection{Моменты, Дисперсия, Ковариация}
+			\begin{definition}\label{lect8:def1}
+			Моменты вводятся формулой:
+			 
+			$EX_n$ - обычный момент, $E|X_n|$ - абсолютный момент, $E(X-EX)^n$ - центральный момент, $E|X-EX|^n$ - центральный абсолютный момент.
+			\end{definition}
+			
+			
+			\begin{definition}\label{lect8:def2}
+			Дисперсия $\var X := E(X-EX)^2$.
+			 
+			Если $X, Y \in L^1 \to E|XY|< \infty$, значит $varX < \infty$, если $X \in L^1$.
+			\end{definition}
+			
+			\begin{definition}\label{lect8:def3}
+			Ковариация задается формулой $\cov(X,Y) := E(X-EX)(Y-EY) = E(XY) - EXEY$. Значит ковариация конечна, если $X,Y \in L^1$.
+			 
+			Если X и Y независимы и EX и EY конечны, то ковариация равна нулю.
+			\end{definition}  
+			
+	

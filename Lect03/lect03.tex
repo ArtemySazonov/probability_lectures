@@ -1,0 +1,115 @@
+\section{Условные вероятности}
+	
+	\subsection{Вероятностные меры на $(\mathbb{R},\mathcal{B}(\mathbb{R}))$. Примеры распределений}
+	
+	\begin{definition}\label{lect03:def1}
+	Пусть $P$ -- вероятностная мера на $(\mathbb{R},\mathcal{B}(\mathbb{R}))$. Её функцией распределения назовём функцию $F(x):=P((-\infty,x]), x\in\mathbb{R}$.
+	\end{definition}
+	
+	\begin{theorem}\label{lect03:th1}
+	Пусть $F$ -- функция распределения. Тогда $F$ обладает следующими свойствами:
+	    \begin{enumerate}
+	        \item $F$ не убывает на $\mathbb{R}$
+	        \item $F$ непрерывна справа в каждой точке
+	        \item $\lim\limits_{x\to -\infty}{F(x)} = 0$
+	        \item $\lim\limits_{x\to +\infty}{F(x)} = 1$
+	    \end{enumerate}
+	\end{theorem}
+	\begin{proof}
+	    \begin{enumerate}
+	        \item Очевидно: если $x\le y$, то $(-\infty,x]\subset (-\infty,y]$. Осталось вспомнить теорему \ref{lect02:th1}.
+	        \item Если $x_n\downarrow x$, то $(-\infty,x_n]\downarrow(-\infty,x]$, и по непрерывности вероятностной меры получаем $F(x_n)\to F(x)$.
+	        \item Рассмотрим $B_n=(-\infty,x_n]$. Если $x_n\downarrow -\infty$, то $B_n\downarrow\varnothing$, и\\ $\lim_{n\to\infty}F(x_n)=\lim_{n\to\infty}{P(B_n)}=P(\varnothing)=0$.
+	        \item Аналогично пункту 3, только теперь берём $x_n\uparrow +\infty$.
+	    \end{enumerate}
+	\end{proof}
+	
+	\begin{theorem}\label{lect03:th2}
+	    Пусть $F$ обладает свойствами из \ref{lect03:th1}. Тогда на $(\mathbb{R},\mathcal{B}(\mathbb{R}))$ существует единственная вероятностая мера $P$, для которой $F$ является функцией распределения.
+	\end{theorem}
+	\begin{proof}
+	    Допустим, что нашлась такая $P$, для которой $F$ является функцией распределения. Тогда $P((a,b])=P((-\infty,b]\setminus (-\infty,a]) = F(b)-F(a)$.
+
+	    Пусть $A=\bigcup\limits_{k=1}^{m} (a_k,b_k]$, $(a_i,b_i]\cap (a_j,b_j] = \varnothing$ при $i\neq j$ (допускаем бесконечные промежутки). Тогда $P(A)=\sum\limits_{k=1}^{m} P((a_k,b_k]) = \sum\limits_{k=1}^{m}(F(b_k)-F(a_k))$. Легко видеть, что множества, на которых мы только что определили меру $P$, образуют алгебру подмножеств на прямой $\mathcal{A}$, и $P(A)$ не зависит от вида представления $A$ в виде объединения. 
+	    
+	    Напоминание(\ref{lect02:th3}): $P$ на $\mathcal{A}$ сигма-аддитивна $\iff$ конечно-аддитивна и непрерывна в $\varnothing$. Конечная аддитивность очевидна. Проверим, что она непрерывна в $\varnothing$. Тогда $P$ будет вероятностной на $\mathcal{A}$.
+	    
+	    Пусть $A_n = \bigcup\limits_{k=1}^{m_n} (a_k^{(n)},b_k^{(n)}], A_n\downarrow\varnothing$. Докажем, что $\lim_{n\to\infty}P(A_n) = 0$.
+	    
+	    По свойствам 3 и 4 функции распределения (\ref{lect03:th1}) имеем $\forall\eps>0 \\ \exists a=a(\eps), b=b(\eps): F(a)<\frac{\eps}{2}, F(b)>1-\frac{\eps}{2}$. Тогда $P(\mathbb{R}\setminus (a,b]) = F(a)+1-F(b)<\eps$.
+	    
+	    $P(A_n) = P(A_n \cap (\mathbb{R} \setminus (a,b])) + P(A_n \cap (a,b])$. В предыдущей строчке написано, что первое слагаемое меньше $\eps$.
+	    
+	    Без ограничения общности считаем, что $A_n\downarrow\varnothing$, а также $\forall n$ $A_n\subset (a,b]$. Будем рассматривать только $A_n\neq\varnothing$.
+	    
+	    Итак, $A_n = \bigcup\limits_{k=1}^{m_n} (a_k^{(n)},b_k^{(n)}]$. Рассмотрим $B_n = \bigcup\limits_{k=1}^{m_n} (x_k^{(n)},b_k^{(n)}]$, где $x_k^{(n)}$ выбраны так, что $a_k^{(n)}<x_k^{(n)}<b_k^{(n)}$ и $F(x_k^{(n)})-F(a_k^{(n)})<\frac{2^{-n}\eps}{m_n}$ (это возможно в силу того, что $F$ непрерывна справа). Ещё рассмотрим $C_n = \bigcup\limits_{k=1}^{m_n} [x_k^{(n)},b_k^{(n)}]$. Очевидно, $C_n$ замкнуто, $C_n\subset A_n$ и $P(A_n)-P(C_n)\le \sum\limits_{k=1}^{m_n} \frac{2^{-n}\eps}{m_n} = 2^{-n}\eps$. $ \bar C_n := \mathbb{R}\setminus C_n$ открыто. $\bigcap\limits_{n=1}^{\infty} C_n \subset \bigcap\limits_{n=1}^{\infty} A_n = \varnothing$, значит, $\bigcup\limits_{n=1}^{\infty} \bar C_n \supset \bar \varnothing = \mathbb{R}$. $\bigcup\limits_{n=1}^{\infty} \bar C_n \supset [a,b]$, значит, $\exists n_1<\ldots<n_r: [a,b] \subset \bar C_{n_1} \cap \ldots \cap \bar C_{n_r}$, а тогда $ C_{n_1} \cap \ldots \cap C_{n_r} \subset \overline{[a,b]}$. Но $\forall i$ $C_{n_i}\subset [a,b]$, значит, $C_{n_1} \cap \ldots \cap C_{n_r} = \varnothing$. 
+	    
+	    $P(A_{n_r}) = P\left(A_{n_r} \setminus \bigcup\limits_{j=1}^{r} C_{n_j}\right) = P\left(A_{n_r}\cap \overline{\bigcup\limits_{j=1}^{r} C_{n_j}} \right) = P\left(A_{n_r}\cup\bigcup\limits_{j=1}^{r}{\bar C_{n_j}} \right) \le \sum\limits_{j=1}^{r} P(A_{n_r} \cap \bar C_{n_j}) \le \sum\limits_{j=1}^{r} P(A_{n_j}\cap \bar C_{n_j}) \le \eps (\sum\limits_{j=1}^{r} 2^{-n_j}) \le \eps$. 
+	    
+	    Итак, всё. Доказали, что $\lim_{n\to\infty}P(A_n) = 0$, и получили, что мера является сигма-аддитивной. Осталось заметить, что по теореме Каратеодори меру можпо однозначно продолжить с $\mathcal{A}$ на $\sigma \{\mathcal{A}\}=\mathcal{B}(\mathbb{R})$.
+	\end{proof}
+	
+	\begin{definition}\label{lect03:def2}
+	    Функция $p(x)$ называется плотностью, если $p(x)\ge 0$ $\forall x\in\mathbb{R}$ и $\int\limits_{-\infty}^{+\infty} p(x)dx = 1$.
+	\end{definition}
+	
+	\begin{prop}\label{lect03:prop1}
+	Возьмём $F(x) = \int\limits_{(-\infty,x]}p(u)du$. Тогда $F$ обладает свойствами 1-4 из \ref{lect03:th1}, и следовательно является функцией распределения некоторой вероятностной меры. 
+	\end{prop}
+	
+	\begin{example}
+	    Равномерное распределение на отрезке $[a,b]$ $$p(x)=\frac{1}{b-a}\cdot\1([a,b])$$
+	\end{example}
+	
+	\begin{example}
+	    Экспоненциальное распределение с параметром $\lambda >0$
+	    $$p(x)=\lambda e^{-\lambda x}\cdot\1([0,+\infty))$$
+	\end{example}
+	
+	\begin{example}
+	    Распределение Коши
+	    $$p(x)=\frac{1}{\pi (1+x^2)}$$
+	\end{example}
+	
+	\begin{example}
+	    Распределение Парето с параметром $a>0$
+	    $$p(x)=\frac{1}{ax^{a+1}}\cdot\1([1,+\infty))$$
+	\end{example}
+	
+	\begin{example}
+	    Гауссовское (нормальное) распределение $\mathcal{N}(a,\sigma)$ с параметрами $a\in\mathbb{R}$ и $\sigma >0$
+	    
+	    $$p(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-a)^2}{2\sigma^2}}$$
+	\end{example}
+	\begin{definition}
+		$\mathcal{N}(0,1)$ -- стандартное нормальное распределение.
+	\end{definition}
+	
+	\subsection{Пополнение вероятностного пространства. Мера Лебега}
+	
+	\begin{definition}\label{lect03:def3}
+	Пусть $(\Omega,\mathcal{F},P)$ -- вероятностное пространство. Пусть $\mathcal{N} = \{B\subset\Omega: \exists A: A\supset B, P(A)=0\}$. Тогда пополнением $\mathcal{F}$ назовём $\mathcal{\bar F} = \{ A \cup B: A \in \mathcal{F} , B \in \mathcal{N} \}$. Это то же самое, что и $\sigma\{\mathcal{F},\mathcal{M}\}$. Пополнением вероятностного пространства назовём $(\Omega,\mathcal{\bar F},\bar P)$, где $\bar P$ определена на $\mathcal{\bar F}$ следующим образом: $\bar P(C) = P(A)$, если $C=A\cup B$, где $A\in\mathcal{F},B\in\mathcal{N}$.
+	\end{definition}
+	
+    Упражнение. Проверить корректность определения, т.е. что если \\$A,A'\in\mathcal{F}, B,B'\in\mathcal{N}$ и $A\cup B = A' \cup B'$, то $\bar P(A\cup B) = \bar P(A' \cup B')$.
+    
+    \begin{definition}\label{lect03:def4}
+        Мера $\mu$ на $(S,\mathcal{B})$ называется $\sigma$-конечной, если существует счётный набор множеств $\{ S_n\}$ такой, что $\mu (S_n)\le \infty$ и $S=\bigcup\limits_{n=1}^{\infty} S_n$.
+    \end{definition}
+    
+    \begin{definition}\label{lect03:def5}
+    Пусть $B\in\mathcal{B}(\mathbb{R})$. Тогда $B = \bigcup\limits_{n\in\mathbb{Z}} (B\cap (n,n+1])$. Введём $\mu_n$ - равномерное распределение на $(n,n+1]$. Тогда определим $\mu(B) = \sum\limits_{n\in\mathbb{Z}} \mu_n(B\cap (n,n+1])$. Это мера Лебега.
+    \end{definition}
+    
+    \subsection{Условная вероятность}
+    
+    \begin{definition}\label{lect03:def6}
+        Пусть $(\Omega,\mathcal{F},P)$ -- вероятностное пространство, ${P(B)>0}$. Условной вероятностью события $A$ при условии $B$ назовём 
+        $$
+        P(A|B) := \frac{P(A\cap B)}{P(B)}
+        $$
+    \end{definition}
+    
+    \begin{theorem}(Формула полной вероятности)\label{lect03:th3}
+        Пусть $\Omega = B_1 \sqcup \ldots \sqcup B_n \sqcup \ldots $. Тогда $P(A) = \sum_{j} P(AB_j) = \sum_{j} P(A|B_j)P(B_j)$.
+    \end{theorem}

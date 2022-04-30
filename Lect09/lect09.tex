@@ -1,0 +1,288 @@
+\section{Сходимость случайных величин}
+
+\subsection{Свойства дисперсии и ковариации} 
+
+Вначале напомним, что по определению \emph{дисперсией} случайной величины $X$ называется следующее математическое ожидание:
+\begin{equation}\label{lect09:eq1}
+\var X:=\E(X-\E X)^2
+\end{equation}
+(по-английски пишут \emph{variance}, не путать с вариацией, т. е. с \emph{variation}!). Тем самым подразумевается, что $\E X$ конечно в формуле \ref{lect09:eq1}. Говорят, что дисперсия существует, если $\E(X-\E X)^2<\infty$, т. е. $X-\E X\in L^2$. Случайная величина, равная константе, входит в пространство $L^2$. Поскольку $L^2$ -- линейное пространство (достаточно учесть, что $|X+Y|\leqslant 2X^2+2Y^2$ и $|cX|^2=c^2X^2$), то видим, что дисперсия конечна тогда и только тогда, когда $X\in L^2$. Поэтому для $X\in L^2$ выполнено
+\[ \var X=\E(X^2-2X\E X+(\E X)^2)=\E X^2-2\E X\E X+(\E X)^2=\E X^2-(\E X^2). \]
+Учли, что интегрируемы $X^2,\;(-2X\E X)$ и $(\E X)^2$.
+
+\begin{example}\label{lect09:ex1}
+Пусть $X=\1(A)$, где $A\in\mathcal{F}$. Принимая во внимание, что $\1_A^2=\mathbbm{1}_A$, получаем $\E(\1(A))^2=\E\1(A)=\P(A)$. Следовательно,
+\[ \var\1(A)=\P(A)-(\P(A))^2=\P(A)(1-\P(A)). \]
+Итак, если случайная величина $X$ принимает значения $1$ и $0$ соответственно с вероятностями $p$ и $1-p$, то $\var X=p(1-p)$.
+\end{example}
+
+Для случайной величины $X$, принимающей значения $x_1,\;\ldots,\;x_n$ соответственно с вероятностями $p_1,\;\ldots,\;p_n$ имеем
+\begin{equation}\label{lect09:eq2}
+\var X=\sum_{k=1}^n(x_k-\overline{x})^2p_k,
+\end{equation}
+где $\overline{x}:=\E X=\sum\limits_{i=1}^np_ix_i$. Если на прямой дана система материальных точек $x_1,\;\ldots,\;x_n$ таких, что в точке $x_k$ сосредоточена масса $p_k\;(k=1,\;\ldots,\;n)$, то, как известно из механики, формула \ref{lect09:eq2} представляет собой \emph{момент инерции} этой системы точек. Таким образом, можно сказать, что \emph{дисперсия является мерой разброса масс относительно центра тяжести системы}.
+
+Из определения \ref{lect09:eq1} немедленно следует, что $\var X\geqslant 0$. Кроме того, для любой величины $X\in L^2$ и константы $c$ верны равенства
+\[ \var(X+c)=\var X,\quad \var(cX)=c^2\var X. \]
+
+\begin{definition}\label{lect09:def1}
+\emph{Ковариацией} случайных величин $X$ и $Y$ называется следующее математическое ожидание
+\begin{equation}\label{lect09:eq3}
+\cov(X,\,Y):=\E(X-\E X)(Y-\E Y),
+\end{equation}
+если оно конечно. Таким образом, заведомо предполагается, что в формуле \ref{lect09:eq3} конечны $\E X$ и $\E Y$. 
+\end{definition}
+
+Неравенство Коши -- Буняковского -- Шварца показывает, что если $X,\;Y\hm\in L^2$, то $\cov(X,\,Y)$ существует и конечна. В то же время, если величины $X,\;Y$ интегрируемы (входят в $L^1$, но необязательно в $L^2$) и независимы, то независимыми и интегрируемыми будут $X-\E X$ и $Y-\E Y$. Поэтому согласно теореме о математическом ожидании произведения независимых интегрируемых величин \ref{lect08:th5} имеем
+\[ \cov(X,\,Y)=\E(X-\E X)(Y-\E Y)=\E(X-\E X)\E(Y-\E Y)=0. \]
+Постройте пример зависимых случайных величин $X$ и $Y$, для которых $\cov(X,\,Y)=0$.
+
+Если $X,\;Y\in L^2$, то легко видеть, что 
+\[ \cov(X,\,Y)=\E(XY)-\E X\E Y. \]
+Из определения \ref{lect09:def1} немедленно вытекает, что $\cov(X,\,Y)=\cov(Y,\,X)$ и $\cov(X,\,X)=\var X$. Если существует $\cov(X,\,Y)$, то для любой константы $c$ имеем $\cov(X+c,\,Y)=\cov(X,\,Y)$ и $\cov(cX,\,Y)=c\cov(X,\,Y)$. Легко видеть, что если существуют $\cov(X,\,Y)$ и $\cov(X,\,Z)$, то существует $\cov(X,\,Y+Z)$ и при этом $\cov(X,\,Y+Z)=\cov(X,\,Y)+\cov(X,\,Z)$. Иначе говоря, если для случайных величин $X,\;Y,\;Z$ определены $\cov(X,\,Y)$ и $\cov(X,\,Z)$, то для любых констант $\alpha,\;\beta\in\mathbb{R}$ справедливо равенство
+\[ \cov(X,\,\alpha Y+\beta Z)=\alpha\cov(X,\,Y)+\beta\cov(X,\,Z). \]
+
+\begin{lemma}\label{lect09:lemma1}
+Пусть $X_1,\;\ldots,\;X_n\in L^2$. Тогда
+\begin{equation}\label{lect09:eq4}
+\var\left(\sum_{k=1}^nX_k\right)=\sum_{i,\,j=1}^n\cov(X_i,\,X_j)=\sum_{i=1}^n\var X_i+2\sum_{1\leqslant i<j\leqslant n}\cov(X_i,\,X_j).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Пользуясь свойством билинейности ковариации, имеем
+\[ \var\left(\sum_{k=1}^nX_k\right)=\cov\left(\sum_{i=1}^nX_i,\,\sum_{j=1}^nX_j\right)=\sum_{i,\,j=1}^n\cov(X_i,\,X_j). \]
+Осталось в последней двойной сумме выделить слагаемые, для которых $i=j$, и учесть, что $\cov(X_i,\,X_i)=\var X_i$.
+\end{proof}
+
+\begin{col}\label{lect09:col1}
+Пусть $X_1,\;\ldots,\;X_n\in L^2$ и независимы. Тогда
+\begin{equation}\label{leqt09:eq5}
+\var\left(\sum_{k=1}^nX_k\right)=\sum_{k=1}^n\var X_k.
+\end{equation}
+\end{col}
+
+\begin{example}\label{lect09:ex2}
+Пусть $X_1,\;\ldots,\;X_n$ -- независимые бернулевские величины (т. е. принимающие значения $1$ и $0$ соответственно с вероятностями $p$ и $1-p$). Тогда, пользуясь следствием \ref{lect09:col1} и примером \ref{lect09:ex1}, для $S_n:=X_1+\ldots+X_n$ получаем
+\begin{equation}\label{lect09:eq6}
+\var S_n=\sum_{k=1}^n\var X_k=np(1-p),\quad n\in\mathbb{N}.
+\end{equation}
+Заметим, что развитая теория позволила фактически устно найти дисперсию величины $S_n$. Если бы мы считали $\var S_n$ непосредственно, то (вспоминая, что $\E S_n=\sum\limits_{k=1}^n\E X_k=np$) должны были бы преобразовать к виду \ref{lect09:eq6} следующую сумму:
+\[ \var S_n=\sum_{k=0}^n(k-np)^2C_n^kp^k(1-p)^{n-k}. \]
+\end{example}
+
+\subsection{Интеграл Лебега по конечной и сигма-конечной мере}
+
+Для конечной меры $\mu$ на $(S,\,\mathcal{B})$ построение интеграла Лебега в точности повторяет три этапа построения интеграла Лебега по вероятностной мере $\P$. При этом для (измеримой функции) $f\colon S\to\mathbb{R}$ 
+\begin{equation}\label{lect09:eq7}
+\int_Sf\,d\mu=\mu(S)\int_Sf\,d\P,
+\end{equation}
+где вероятностная мера $P:=\mu/\mu(S)$. Тривиальный случай, когда $\mu$ тождественно равна нулю, исключается из рассмотрения. Точнее говоря, оба интеграла в \ref{lect09:eq7} существуют или не существуют одновременно, а если существуют, то равны.
+
+Заметим, что если $\mu$ -- конечная мера на $(S,\,\mathcal{B})$ и $B\in\mathcal{B}$, то для любой измеримой функции $f\colon S\to\mathbb{R}$ 
+\begin{equation}\label{lect09:eq8}
+\int_Bf\,d\mu:=\int_Sf\1_B\,d\mu=\int_B f|_B\,d\mu|_B,
+\end{equation}
+где $f|_B$ -- сужение функции $f$ на множество $B$, а $\mu|_B$ -- сужение меры $\mu$ на $\sigma$-алгебру $\mathcal{B}|_B:=\mathcal{B}\cap B$. Другими словами, $f$ рассматривается теперь только на $B$, и $f(x)=f|_B(x)$ для $x\in B$, а $\mu|_B(A)=\mu(A\cap B)$ для $A\in\mathcal{B}$. Равенство \ref{lect09:eq8} очевидно, если $f$ -- простая функция. Затем берём неотрицательную функцию $f$ и строим последовательность простых функций $0\leqslant f_n\nearrow f$ при $n\to\infty$. Тогда для сужения $f_n$ на $B$ получаем, что (для простых на $B$ функций) $0\leqslant (f_n)|_B\nearrow f|_B,\;n\to\infty$. И в этом случае \ref{lect09:eq8} имеет место. Далее стандартным образом рассматриваются знакопеременные $f$.
+
+\begin{definition}\label{lect09:def2}
+Мера $\mu$, заданная на $(S,\,\mathcal{B})$ называется \emph{$\sigma$-конечной}, если существует разбиение $S$ последовательностью множеств $S_1,\;S_2,\;\ldots\in\mathcal{B}$ таких, что $\mu(S_n)<\infty$ при каждом $n\in\mathbb{N}$.
+\end{definition}
+
+Чтобы при этом исключить из рассмотрения конечную меру $\mu$, обычно предполагают, что $\mu(S)=\infty$. Если $\mu$ является $\sigma$-конечной мерой на $(S,\,\mathcal{B})$, а последовательность множеств $(S_n)_{n\in\mathbb{N}}$ задаёт разбиение $S\;(S_n\in\mathcal{B},\;n\in\mathbb{N})$, то для любого $B\in\mathcal{B}$
+\begin{equation}\label{lect09:eq9}
+\mu(B)=\sum_{n=1}^\infty\mu(B\cap S_n)=\sum_{n=1}^\infty\mu_n(B_n),
+\end{equation} 
+где $\mu_n$ -- сужение меры $\mu$ на $(S_n,\,\mathcal{B}_n)$, а $\sigma$-алгебра $\mathcal{B}_n:=\mathcal{B}\cap S_n$. Формула \ref{lect09:eq9} подсказывает, как можно задать $\sigma$-конечную меру, например, на $(\mathbb{R},\,\mathcal{B}(\mathbb{\mathbb{R}}))$. Мы видели, что по функции $F=F(x),\;x\in\mathbb{R}$, обладающей определёнными четырьмя свойствами, можно ввести меру $Q$ на
+$(\mathbb{R},\,\mathcal{B}(\mathbb{R}))$, для которой $F$ будет функцией распредления. Для $n\in\mathbb{Z}$ введём (непрерывную) функцию
+\[ 
+F_n(x):=
+\begin{cases}
+0,&x\in(-\infty,\,n],\\
+x-n,&x\in(n,\,n+1],\\
+1,&x\in(n+1,\,\infty).
+\end{cases}
+\]
+Очевидно, функция $F_n$ отвечает вероятностная мера $\mu_n$ на $(\mathbb{R},\,\mathcal{B}(\mathbb{R}))$ такая, что $\mu_n(S_n)=1$, где $S_n:=(n,\,n+1],\;n\in\mathbb{N}$. Назовём \emph{мерой Лебега} на $(\mathbb{R},\,\mathcal{B}(\mathbb{R}))$ меру $\mu:=\sum\limits_{n=1}^\infty\mu_n$, т. е.
+\[ \mu(B):=\sum_{n=1}^\infty\mu_n(B),\quad B\in\mathcal{B}. \]
+Мера $\mu$ является $\sigma$-конечной. Заметим, что $\mu((a,\,b])=b-a$ для $-\infty<a\leqslant b<\infty$.
+
+\begin{definition}\label{lect09:def3}
+Пусть $\mu$ есть $\sigma$-конечная мера на $(S,\,\mathcal{B})$. Для измеримой функции $f\colon S\to\mathbb{R}_+$ \emph{интеграл по мере} $\mu$ вводится формулой
+\begin{equation}\label{lect09:eq10}
+\int_Sf\,d\mu:=\sum_{n=1}^\infty\int_{S_n}f_n\,d\mu,
+\end{equation}
+где $f_n$ -- сужение $f$ на $S_n$, а $\mu_n$ -- сужение $\mu$ на $(S_n,\,\mathcal{B}_n),\;\mathcal{B}_n:=\mathcal{B}\cap S_n$. Если измеримая функция $f\colon S\to\mathbb{R}$, то, как обычно, полагаем
+\[ \int_Sf\,d\mu:=\int_Sf^+\,d\mu-\int_Sf^-\,d\mu, \]
+причём в случае неопределённости $\infty-\infty$ говорим, что интеграл не существует. 
+\end{definition}
+
+В качестве несложного упражнения предлагается доказать, что правая часть формулы \ref{lect09:eq10} не изменится при выборе иного разбиения множества $S$.
+
+Как и для вероятностной меры, при $p>0$ вводятся пространства $L^p(S,\,\mathcal{B},\,\mu)$, состоящие из функций $f$ (точнее говоря, классов эквивалентных функций), для которых 
+\[ \int_S|f|^p\,d\mu<\infty. \]
+Взятие интеграла обладает свойством линейности на пространстве $L^1(S,\,\mathcal{B},\,\mu)$ не только для конечной, но и для $\sigma$-конечной меры $\mu$.
+
+\subsection{Замена меры в интеграле Лебега}
+
+\begin{definition}\label{lect09:def4}
+Пусть $\nu$ и $\mu$ -- две $\sigma$-конечные меры на $(S,\,\mathcal{B})$. Говорят, что $\nu$ \emph{абсолютно непрерывна} относительно $\mu$ (пишут $\nu\ll\mu$), если $\mu(B)=0$ для $B\in\mathcal{B}$ влечёт, что $\nu(B)=0$.
+\end{definition}
+
+Сформулируем без доказательства следующий очень важный результат.
+
+\begin{theorem}\label{lect09:th1}
+    (Радон-Никодим)
+Пусть $\mu$ и $\nu$ -- две $\sigma$-конечные меры на $(S,\,\mathcal{B})$. Соотношение $\nu\ll\mu$ равносильно тому, что найдётся измеримая функция $p\colon S\to\mathbb{R}_+$, называемая плотностью меры $\nu$ по мере $\mu$ $($или производной Радона -- Никодима меры $\nu$ по мере $\mu)$, такая, что 
+\begin{equation}\label{lect09:eq11}
+\nu(B)=\int_Bp(x)\mu(dx)\quad\text{для каждого}\;B\in\mathcal{B}.
+\end{equation}
+При этом если для любого $B\in\mathcal{B}$ и некотрой измеримой функции $q\colon S\to\mathbb{R}_+$ справедливо равенство
+\[ \nu(B)=\int_Bq(x)\mu(dx), \]
+то $q(x)=p(x)$ для $\mu$-почти всех $x\in S$ $($иначе говоря, $\mu\{x\in S:q(x)\neq p(x)\}=0)$.
+\end{theorem}
+
+Очевидно, интеграл в \ref{lect09:eq11} не изменится, если вместо $p$ взять любую функцию $f$ такую, что $\mu$-почти всюду $f=p$. Таким образом, когда мы говорим о плотности меры $\nu$ по мере $\mu$, то имеем в виду целый класс эквивалентных функций (и можем оперировать с любым представителем этого класса). Производную Радона -- Никодима меры $\nu$ по мере $\mu$ обозначают $d\nu/d\mu$.
+
+\begin{theorem}\label{lect09:th2}
+Пусть $\mu$ и $\nu$ -- две $\sigma$-конечные меры на $(S,\,\mathcal{B})$, причём $\nu\ll\mu$ и $p=d\nu/d\mu$. Если $h\colon S\to\mathbb{R}$, то
+\begin{equation}\label{lect09:eq12}
+\int_Sh(x)\nu(dx)=\int_Sh(x)p(x)\mu(dx).
+\end{equation}
+Точнее говоря, оба интеграла существуют или не существуют одновременно, а если существуют, то равны.
+\end{theorem}
+\begin{proof}
+Пусть $h=\1_B$ для некоторого $B\in\mathcal{B}$. Тогда
+\[ \int_Sh(x)\nu(dx)=\nu(B),\quad\int_Sh(x)p(x)\mu(dx)=\int_Bp(x)\mu(dx)=\nu(B). \]
+Линейность интеграла обеспечивает равенство \ref{lect09:eq12} для простых функций. Для неотрицательных функций $h$ требуемый результат получается по теореме о монотонной сходимости, которая легко переносится на случай интеграла по $\sigma$-конечной мере. Для знакопеременной $h$ достаточно отдельно рассмотреть интегралы от $h^+$ и $h^-$.
+\end{proof}
+
+\begin{nb}\label{lect09:nb1}
+Нетрудно показать, что для непрерывных и кусочно- непрерывных функций, заданных на отрезке, интеграл Римана совпадает с интегралом Лебега (по мере Лебега). В то же время (несобственный) интеграл Римана по всей прямой от функции $f$ может быть конечным, а интеграл от $|f|$ бесконечным. Достаточно рассмотреть непрерывную функцию
+\[ 
+f(x)=
+\begin{cases}
+\dfrac{\sin{x}}{x},&x\in\mathbb{R}\setminus\{0\},\\
+1,&x=0.
+\end{cases}
+\]
+В этом проявляется существенное отличие интеграла Римана от интеграла Лебега (функция $f$ имеет конечный интеграл Лебега по $\sigma$-конечной мере тогда и только тогда, когда конечен интеграл функции $|f|$ по этой мере).
+\end{nb}
+
+\begin{example}\label{lect09:ex3}
+Пусть $X\sim N(a,\,\sigma^2)$, где $a\in\mathbb{R},\;\sigma>0$. Другими словами, у случайно величины имеется плотность
+\[ p(x)=\dfrac{1}{\sigma\sqrt{2\pi}}\exp\left\{-\dfrac{(x-a)^2}{2\sigma^2}\right\},\quad x\in\mathbb{R}. \]
+Точнее говоря, $p(x)=\dfrac{d\P_X}{d\mu}(x)$, где $P_X$ -- распределение $X$, $\mu$ -- мера Лебега на $(\mathbb{R},\,\mathcal{B}(\mathbb{R}))$. Найдём $\E X$ и $\var X$.
+
+Применяя теорему прошлой лекции о переходе от интеграла по мере $\mathsf{P}$ к интегралу по распределению случайного элемента, а также пользуясь формулой \ref{lect09:eq12}, имеем (далее пишем $dx$ вместо $\mu(dx)$, где $\mu$ -- мера Лебега)
+\begin{multline*}
+\E X=\int_\mathbb{R}xp(x)\,dx=\int_\mathbb{R}(x-a)p(x)+a\int_\mathbb{R}p(x)\,dx=\\=\sigma\int_\mathbb{R}u\dfrac{1}{\sqrt{2\pi}}\exp\left\{-\dfrac{u^2}{2}\right\}\,du+a=a,
+\end{multline*}   
+где учтено, что интеграл от плотности вероятностной меры, взятый по $\mathbb{R}$, равен единице, а интеграл по всей прямой (который конечен) от нечётной функции равен нулю. Легко видеть, что функция $|x|p(x),\;x\in\mathbb{R},$ интегрируема и по Риману, и по Лебегу, причём значения этих интегралов совпадают. Применяя интегрирование по частям для интеграла Римана, получаем
+\begin{equation*}
+\var X=\int_\mathbb{R}(x-a)^2p(x)\,dx=\sigma^2\int_\mathbb{R}u^2\dfrac{1}{\sqrt{2\pi}}\exp\left\{-\dfrac{u^2}{2}\right\}\,du=\sigma^2.
+\end{equation*}
+Таким образом, в записи $X\sim N(a,\,\sigma^2)$ указывается математическое ожидание и дисперсия величины $X$.
+\end{example}
+
+\subsection{Сходимость случайных величин}
+
+Ниже даются определения четырёх основных видов сходимости случайных величин $X_n\;(n\in\mathbb{N})$ к случайной величине $X$ при $n\to\infty$.
+
+\begin{definition}\label{lect09:def5}
+Говорят, что $X_n\to X$ \emph{почти наверное} (\emph{п. н.}) или \emph{с вероятностью единица}, если 
+\[ \P(\omega:X_n(\omega)\not\to X(\omega)\;\text{при}\;n\to\infty)=0 \]
+\end{definition}
+
+\begin{definition}\label{lect09:def6}
+Запись $X_n\overset{\P}{\to}X$ при $n\to\infty$ обозначает \emph{сходимость по вероятности}. Она имеет место, если для любого $\varepsilon>0$ выполнено
+\[ \P(\omega:|X_n(\omega)-X(\omega)|\geqslant\varepsilon)\to 0,\quad n\to\infty. \]
+\end{definition}
+
+\begin{definition}\label{lect09:def7}
+Если $X,\;X_n\in L^p,\;n\in\mathbb{N},$ то пишут $X_n\overset{L^p}{\to}X$, когда $\E|X_n-X|^p\to 0$ при $n\to\infty$.
+\end{definition}
+
+\begin{definition}\label{lect09:def8}
+Пусть на некотором прострастве $(S,\,\mathcal{B})$ заданы вероятностные меры $Q$ и $Q_n$, \mbox{$n\in\mathbb{N}$}. \emph{Слабая сходимость} $Q_n$ к $Q$ (пишут $Q\Rightarrow Q)$ означет, что для каждой непрерывной и ограниченной функции $h\colon S\to\mathbb{R}$ 
+\begin{equation}\label{lect09:eq13}
+\int_Sh(x)Q_n(dx)\to\int_Sh(x)Q(dx),\quad n\to\infty.
+\end{equation}
+Пусть случайные элементы $X\colon\Omega\to S$ и $X_n\colon\Omega\to S$ (важно, чтобы все элементы действовали в одно и то же пространство $S$, снабжённое $\sigma$-алгеброй $\mathcal{B}$). Говорят, что $X_n$ \emph{сходятся по распределению} к $X$ при $n\to\infty$, если
+\begin{equation}\label{lect09:eq14}
+\P_{X_n}\Rightarrow \P_X,\quad n\to\infty,
+\end{equation}
+где $\P$ и $\P_{X_n}$ -- соответственно распределения $X$ и $X_n$. Наряду с \ref{lect09:eq14} пишут $X_n\overset{law}{\to} X$ или $X_n\overset{\mathcal{D}}{\to}X$ (от слова \emph{distribution}), $n\to\infty$.
+\end{definition}
+
+Обратите внимание на то, что, в отличие от теорем о предельном переходе под знаком интеграла Лебега, в формуле \ref{lect09:eq13} меняются не подынтегральные функции, а меры. Сопоставляя \ref{lect09:eq13} и \ref{lect09:eq14} и вспоминая формулу перехода от интеграла по мере $\P$ к интегралу по распределению случайного элемента, видим, что $X_n\overset{\mathcal{D}}{\to}X$ тогда и только тогда, когда для любой непрерывной и ограниченной функции $h\colon S\to\mathbb{R}$
+\begin{equation}\label{lect09:eq15}
+\E h(X_n)\to\E h(X),\quad n\to\infty.
+\end{equation} 
+
+\begin{theorem}\label{lect09:th3}
+Между видами сходимости случайных величин существуют следующие взаимосвязи.
+\begin{enumerate}
+\item Сходимость п. н. влечёт сходимость по вероятности.
+\item Сходимость в $L^p\;(p>0)$ влечёт сходимость по вероятности.
+\item Сходимость по вероятности влечёт сходимость по распределению.
+\end{enumerate}
+\end{theorem}
+
+Предлагается построить примеры, показывающие, что других нетривиальных соотношений, вообще говоря, нет (тривиальными считается последовательное использование двух импликаций, например, сходимость п. н. влечёт сходимость по вероятности, а сходимость по вероятности обеспечивает сходимость по распределению).
+
+Нам понадобится вспомогательный результат.
+
+\begin{lemma}\label{lect09:lemma2}
+Справедливо следующее утверждение: $X_n\to X$ п. н. тогда и только тогда, когда для каждого $\varepsilon>0$
+\begin{equation}\label{lect09:eq16}
+\P\left(\sup_{k\geqslant n}|X_k-X|\geqslant\varepsilon\right)\to 0,\quad n\to\infty.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Для $\varepsilon>0$ и $n\in\mathbb{N}$ введём событие $A_n^\varepsilon:=\{|X_n-X|\geqslant\varepsilon\}$. Положим
+\[ A^\varepsilon:=\bigcap_{n=1}^\infty\bigcup_{k\geqslant n}A_k^\varepsilon. \]
+Тогда, очевидно, 
+\[ \{\omega:X_n(\omega)\not\to X(\omega)\;\text{при}\;n\to\infty\}=\bigcup\limits_{\varepsilon>0}A^\varepsilon.\] 
+Действительно, если найдётся $\varepsilon>0$ такое, что для любого $n$ существует $k\geqslant n$ такое, что $|X_n(\omega)-X(\omega)|\geqslant\varepsilon$, то все такие точки $\omega$ и будут составлять множество, на котором $X_n(\omega)$ не сходится к $X(\omega)$. Несчётное объединение событий, вообще говоря, не обязано быть событием. Однако очевидно, 
+\[ \bigcup_{\varepsilon>0} A^\varepsilon=\bigcup_{m=1}^\infty A^{1/m}. \]
+(учитываем, что $A^\varepsilon\subset A^\delta$ при $\varepsilon>\delta$). Итак, $\P\left(\bigcup\limits_{m=1}^\infty A^{1/m}\right)=0$ тогда и только тогда, когда $\P\left(A^{1/m}\right)=0$ для каждого $m\in\mathbb{N}$. Последнее утверждение равносильно тому, что $\P(A^\varepsilon)=0$ для любого $\varepsilon>0$. По свойству непрерывности вероятностной меры
+\[ \P(A^\varepsilon)=\lim_{n\to\infty}\P\left(\bigcup_{k\geqslant n}|X_k-X|\geqslant\varepsilon\right). \] 
+Остаётся заметить, что 
+\[ \left\{\bigcup_{k\geqslant n}|X_k-X|\geqslant\varepsilon\right\}=\left\{\sup_{k\geqslant n}|X_k-X|\geqslant\varepsilon\right\}. \]
+\end{proof}
+
+\begin{proof}[Доказательство теоремы 2.3.]
+В силу леммы \ref{lect09:lemma2} утверждение $1$ теоремы вытекает из того, что для каждого $\varepsilon>0$ и любого $n\in\mathbb{N}$
+\[ \{|X_n-X|\geqslant\varepsilon\}\subset\left\{\sup_{k\geqslant n}|X_k-X|\geqslant\varepsilon\right\}. \]
+Утверждение $2$ следует из неравенства Маркова: для любого $\varepsilon>0$ и $p>0$ имеем
+\[ 
+\P(|X_n-X|\geqslant\varepsilon)\leqslant\dfrac{\E|X_n-X|^p}{\varepsilon^p}. \]
+Установим утверждение $3$, т. е. проверим выполнение \ref{lect09:eq15}. Функция $h(X)\in L^1$, так как по условию $|h(x)|\leqslant C=\textnormal{const}$. Если $A\in\mathcal{F}$, то измеримая функция $h(X)\1_A\in L^1$, поскольку $|h(X)\1_A|\leqslant|h(X)|$ (также учли, что произведение измеримых функций измеримо). Это же относится и к функции $h(X_n)$. Поэтому для любого $\varepsilon>0$ имеем
+\begin{multline*}
+ \E h(X)=\E h(X)\1(|X-X_n|<\varepsilon)+\E h(X)\1(|X-X_n|\geqslant\varepsilon),\\
+ \E h(X_n)=\E h(X_n)\1(|X-X_n|<\varepsilon)+\E h(X_n)\1(|X-X_n|\geqslant\varepsilon).
+\end{multline*}
+Очевидно,
+\begin{multline}\label{lect09:eq17}
+\left|\E h(X)\1(|X-X_n|\geqslant\varepsilon)\right|\geqslant C\P(|X-X_n|\geqslant\varepsilon),\\ \left|\E h(X_n)\1(|X-X_n|\geqslant\varepsilon)\right|\geqslant C\P(|X-X_n|\geqslant\varepsilon).
+\end{multline}
+В силу свойств функции распределения для любого $\gamma>0$ найдётся $a=a(\gamma)$ такое, что $\P(|X|>a)=\P(X<-a)+\P(X>a)\leqslant\gamma$. Поэтому аналогично \ref{lect09:eq17} получаем
+\begin{multline*}
+\left|\E h(X)\1(|X-X_n|<\varepsilon)\1(|X|>a)\right|\geqslant CP(|X|>a),\\\left|\E h(X_n)\1(|X-X_n|<\varepsilon)\1(|X|>a)\right|\geqslant CP(|X|>a). 
+\end{multline*}
+Осталось оценить близость $\E h(X)\1(|X-X_n|<\varepsilon)\1(|X|\geqslant a)$ к $\E h(X)\1(|X-X_n|<\varepsilon)\1(|X|\geqslant a)$. Возьмём $\varepsilon\in(0,\,1)$. Тогда одновременное выполнение событий $\{|X-X_n|<\varepsilon\}$ и $\{|X|\geqslant a\}$ влечёт, что значения $X$ и $X_n$ принадлежат отрезку $[-a-1,\,a+1]$. Функция $h$ непрерывна на $\mathbb{R}$. Следовательно, она равномерно непрерывна на $[-a-1,\,a+1]$. Поэтому для каждого $\gamma>0$ мы можем найти такое $\varepsilon\in(0,\,1),\;\varepsilon=\varepsilon(\gamma),$ что если $|x-u|<\varepsilon$ и $x,\;u\in[-a-1,\,a+1]$, то $|h(x)-h(u)|<\gamma$. Таким образом,
+\begin{multline*}
+\left|\E h(X)\1(|X-X_n|<\varepsilon)\1(|X|\leqslant a)-\E h(X_n)\1(|X-X_n|<\varepsilon)\1(|X|\leqslant a)\right|\leqslant\\\leqslant\E|h(X)-h(X_n)|\1(|X-X_n|<\varepsilon)\1(|X|\leqslant a)\leqslant\\\leqslant\gamma P(|X-X_n|<\varepsilon,\;|X|\leqslant a)\leqslant\gamma.
+\end{multline*}
+Итак, для любого $\gamma>0$ существует $\varepsilon=\varepsilon(\gamma)\in(0,\,1)$ такое, что выполнено неравенство
+\[ |\E h(X)-\E h(X_n)|\leqslant 2CP(|X-X_n|\geqslant\varepsilon)+2C\gamma+\gamma. \]
+Осталось найти $N_0=N_0(\gamma)$ такое, что $P(|X-X_n|\geqslant\varepsilon)<\gamma$ при $n\geqslant N_0$. Тогда
+\[ |\E h(X)-\E h(X_n)|\leqslant\gamma(4C+1) \]
+при $n\geqslant N_0$. Поскольку $\gamma$ -- произвольное положительное число, приходим к \ref{lect09:eq15}.
+\end{proof}
+
+В качестве сложного упражнения предлагается самостоятельно доказать следующий результат.
+
+\begin{theorem}\label{lect09:th4}
+Соотношение $X_n\overset{\mathcal{D}}{\to}X$ справедливо в том и только в том случае, когда $F_n(x)\to F(x)$ при $n\to\infty$ во всех точках $x$, являющихся точками непрерывности предельной функции $F$ $(F$ и $F_n$ -- соответсвенно функции распределения случайных величин $X$ и $X_n,\;n\in\mathbb{N})$.
+\end{theorem}

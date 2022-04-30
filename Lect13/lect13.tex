@@ -1,0 +1,338 @@
+
+\section{Центральная предельная теорема}
+\subsection{Вспомогательные результаты}
+
+В дальнейшем будем пользоваться доказанными ранее неравенствами из леммы \ref{lect12:lem1} и следствия \ref{lect12:col1}.\\ При $a \leqslant b$ и $ f: [a,b] \mapsto \Co$
+$$
+\left| \int\limits_a^b f(t)\,dt\right| \leqslant \int\limits_a^b\left| f(t)\right|\,dt
+$$
+$ \forall \alpha \in \R$
+$$
+\left| e^{i\alpha} - 1\right| \leqslant \left|\alpha\right|
+$$
+Также полезна следующая тривиальная оценка:
+$$
+\left| e^{i\alpha} - 1\right| \leqslant \left| e^{i\alpha}\right| + \left|1\right| = 2
+$$
+\begin{lemma}\label{lect13:lemma1}
+$\forall u \in \R, \, \forall n \in \mathbb{Z}_+$ верно неравенство:
+$$
+\left| e^{iu} - \sum_{k = 0}^n \frac{(iu)^k}{k!}\right| \leqslant \frac{2|u|^n}{n!} \wedge \frac{|u|^{n+1}}{(n+1)!}
+$$
+где $a \wedge b = \min \{a, b\}$.
+\end{lemma}
+\begin{proof}
+Достаточно доказать, что модуль разности оценивается каждой из дробей в правой части неравенства. Докажем по индукции.\\ База:~$n = 0$. Согласно неравенствам выше: $\left| e^{i\alpha} - 1\right| \leqslant 2 \wedge \left|\alpha\right|$. \\Пусть верно для $n$, докажем для $n+1$. Обозначим $h_n(u) := e^{iu} - \sum\limits_{k = 0}^n \frac{(iu)^k}{k!}$. Тогда
+$$
+\left| \int\limits_0^u h_{n-1}(s)\,ds\right| = \left|\frac{1}{i}h_n(u)\right| \implies \left|h_n(u)\right| = \left| \int\limits_0^u h_{n-1}(s)\,ds\right|
+$$
+Применим предположение индукции и оценку модуля интеграла интегралом модуля:
+$$
+\left|h_n(u)\right| \leqslant \int\limits_0^{|u|} \left| h_{n-1}(s) \right| \leqslant \int\limits_0^{|u|} \frac{s^n}{n!} = \left. \frac{s^{n+1}}{(n+1)!} \right|_0^{|u|} = \frac{|u|^{n+1}}{(n+1)!}
+$$
+Для другой оценки:
+$$
+\left| e^{iu} - \sum_{k = 0}^n \frac{(iu)^k}{k!}\right| \leqslant \left| e^{iu} - \sum_{k = 0}^{n-1} \frac{(iu)^k}{k!}\right| + \left|\frac{(iu)^n}{n!}\right| \leqslant \frac{|u|^n}{n!} + \frac{|u|^n}{n!} = \frac{2|u|^n}{n!}
+$$
+\end{proof}
+\begin{col}
+Пусть $X$ "--- случайная величина, для которой\\ $\E\left|X\right| < \infty$. Тогда $\forall t \in \R, \, \forall \eps > 0$ справедливо неравенство:
+\begin{multline*}
+\left| \phi_X(t) - \sum_{k = 0}^n \frac{(it)^k}{k!}\E X^k\right| \leqslant \\ \leqslant
+\frac{2|t|^n}{n!}\E\Bigl(\left|X\right|^n\1\{\left|X\right| > \eps\} \Bigl) + \frac{|t|^{n+1}}{(n+1)!}\E\left(\left|X\right|^{n+1}\1\{\left|X\right| \leqslant \eps\} \right),
+\end{multline*}
+где $\phi_X(t)$ "--- характеристическая функция случайной величины $X$.
+\end{col}
+\begin{proof}
+\begin{multline*}
+\left| \phi_X(t) - \sum_{k = 0}^n \frac{(it)^k}{k!}\E X^k\right| = \left|\E\left(e^{itX}- \sum_{k = 0}^n \frac{(it)^k}{k!} X^k\right)\right| \leqslant \E\left|e^{itX}- \sum_{k = 0}^n \frac{(it)^k}{k!} X^k\right| = \\
+= \E\left(\left|e^{itX}- \sum_{k = 0}^n \frac{\left(itX\right)^k}{k!}\right|\1\{\left|X\right| > \eps\}\right) + \E\left(\left|e^{itX}- \sum_{k = 0}^n \frac{\left(itX\right)^k}{k!}\right|\1\{\left|X\right| \leqslant \eps\}\right)
+\end{multline*}
+Пользуясь леммой \ref{lect13:lemma1}, выражения с модулем под знаком математического ожидания в обоих слагаемых можно оценить первой и второй дробью из доказанной оценки соответственно.
+\end{proof}
+\begin{lemma}\label{lect13:lemma2}
+$\forall z_1, \ldots, z_m \in \Co,\, \forall w_1, \ldots, w_m \in \Co$
+таких, что $\forall k = 1, \ldots m \\|z_k| \leqslant 1,\, |w_k|~\leqslant~1$
+верно неравенство:
+$$
+|z_1z_2\ldots z_m - w_1w_2\ldots w_m| \leqslant \sum_{k=1}^m|z_k - w_k| 
+$$
+\end{lemma}
+\begin{proof}
+Докажем по индукции. При $m = 1$ неравенство обращается в тождество. Пусть верно для $m-1$, тогда докажем для $m$.
+\begin{multline*}
+|z_1z_2\ldots z_m - w_1w_2\ldots w_m| \leqslant 
+\\ 
+\leqslant|z_1z_2\ldots z_m - w_1z_2\ldots z_m| + |w_1z_2\ldots z_m - w_1w_2\ldots w_m| = 
+\\
+= |z_1 - w_1||z_2\ldots z_m| + |w_1||z_2\ldots z_m - w_2\ldots w_m|  \leqslant
+\\
+\leqslant |z_1 - w_1| + \sum_{k = 2}^m|z_k - w_k| = \sum_{k=1}^m|z_k - w_k|
+\end{multline*}
+\end{proof}
+\subsection{Теорема Линдеберга}
+\begin{theorem}\label{lect13:theorem1}
+(Центральная предельная теорема, Линдеберг)\\
+Пусть $\{X_{n, k}, \,k = 1, \ldots, m_n, \, n \in \N\}$ "--- массив независимых при каждом~$n$ случайных величин $X_{n, 1} \, \ldots , X_{n, m_n}$ (этот массив также называется схемой серий, а последовательность случайных величин при фиксированном~$n$ называется $n$-ой серией). Пусть также случайные величины $X_{n, k}$ центрированные. Предположим, что
+$$
+\sum_{k = 1}^{m_n}\var X_{n, k} \to \sigma^2 \geqslant 0, \, n\to \infty
+$$
+и выполнено условие Линдеберга на функцию Ляпунова $\mathcal{L}_n$:
+$$
+\forall \eps > 0 \, \mathcal{L}_n(\eps) := \sum_{k = 1}^{m_n}\E\left(X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right) \to 0, \, n \to \infty.
+$$
+Тогда $S_n := \sum\limits_{n = 1}^{m_n}X_{n, k} \overset{\mathcal{D}}{\to} Z \sim N(0, \sigma^2)$
+\end{theorem}
+\begin{proof}
+Пусть наряду с массивом $\{X_{n, k}, \,k = 1, \ldots, m_n, \, n \in \N\}$ задан массив случайных величин $\{Y_{n, k}, \,k = 1, \ldots, m_n, \, n \in \N\}$, где\\ $\forall n\, Y_{n, 1}, \ldots Y_{n, m_n}$ "--- независимые случайные величины, при этом \\$Y_{n, k} \sim N(0, \sigma_{n, k}^2)$, где $\sigma_{n, k}^2 = \var X_{n, k}$. Такие случайные величины можно взять по теореме Ломницкого"--~Улама.\\ Определим $T_n := \sum\limits_{n = 1}^{m_n} Y_{n, k}$. Тогда 
+$$
+T_n \sim N(0, \sum\limits_{n = 1}^{m_n}\sigma_{n, k}^2),
+$$ поскольку характеристическая функция $T_n$ есть произведение характеристических функций $Y_{n, k}$, имеющих нормальное распределение, а характеритическая функция нормального распределения с параметрами $a,\, \sigma^2$ равна $\phi(t) = \exp\left\{iat - \frac{\sigma^2t^2}{2}\right\}$. Из взаимооднозначного соответствия между характеристическими функциями и случайными величинами следует, что $T_n$ распределена нормально с параметрами $0$ и $\sum\limits_{n = 1}^{m_n}\sigma_{n, k}^2$.
+Более того:
+$$
+\phi_{T_n}(t) = \exp\left\{-\sum\limits_{n = 1}^{m_n}\frac{\sigma_{n, k}^2t^2}{2}\right\} \underset{n \to \infty}{\to} e^{-\frac{\sigma^2t^2}{2}} \, \forall t \in \R
+$$
+Тогда по теореме Леви о непрерывности \ref{lect12:th5} $T_n \overset{\mathcal{D}}{\to} N(0, \sigma^2)$. Для доказательства теоремы достаточно показать, что $\phi_{S_n}(t) \underset{n \to \infty}{\to} e^{-\frac{\sigma^2t^2}{2}} \, \forall t \in \R$ и опять применить теорему о непрерывности. Для этого, в свою очередь, достаточно показать, что $\phi_{S_n}(t) - \phi_{T_n}(t) \underset{n \to \infty}{\to} 0\,\forall t \in \R$. Действительно:
+$$
+\left|\phi_{S_n}(t) - \phi_{T_n}(t)\right| = \left|\prod_{k = 1}^{m_n}\phi_{X_{n, k}}(t) -\prod_{k = 1}^{m_n}\phi_{Y_{n, k}}(t) \right| \leqslant \sum_{k = 1}^{m_n}\left|\phi_{X_{n, k}}(t) - \phi_{Y_{n, k}}(t)\right|
+$$
+В силу независимости между собой $X_{n, k}$ и $Y_{n, k}$, а также леммы \ref{lect13:lemma2} \\($\left|\phi(t)\right|~\leqslant~1 \, \forall t \in \R$ по свойству характеристической функции).
+\begin{multline*}
+\sum_{k = 1}^{m_n}\left|\phi_{X_{n, k}}(t) - \phi_{Y_{n, k}}(t)\right| \leqslant
+\\
+\leqslant \sum_{k = 1}^{m_n}\left|\phi_{X_{n, k}}(t) - 1 + \frac{\sigma_{n, k}^2t^2}{2}\right| + \sum_{k = 1}^{m_n}\left|\phi_{Y_{n, k}}(t)  - 1 + \frac{\sigma_{n, k}^2t^2}{2}\right|
+\end{multline*}
+По лемме \ref{lect13:lemma1}:
+\begin{multline*}
+\sum_{k = 1}^{m_n}\left|\phi_{X_{n, k}}(t) - 1 + \frac{\sigma_{n, k}^2t^2}{2}\right| + \sum_{k = 1}^{m_n}\left|\phi_{Y_{n, k}}(t)  - 1 + \frac{\sigma_{n, k}^2t^2}{2}\right| \leqslant 
+\\
+\leqslant \sum_{k = 1}^{m_n}\left(t^2\E\left(X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right) + |t|^3\E\left(\left|X_{n, k}\right|^3 \1\left\{\left|X_{n, k}\right| \leqslant \eps\right\}\right)\right) + 
+\\
+ + |t|^3\sum_{k = 1}^{m_n}\E\left(\left|Y_{n, k}\right|^3\right)
+\leqslant t^2\mathcal{L}_n(\eps) + \eps\left|t\right|^3\sum_{k = 1}^{m_n}\sigma_{n, k}^2 + |t|^3\sum_{k = 1}^{m_n}\E\left(\left|Y_{n, k}\right|^3\right).
+\end{multline*}
+Последняя оценка получена подстановкой функции Ляпунова по определению и неравенством:
+\begin{multline*}
+\E\left(\left|X_{n, k}\right|^3 \1\left\{\left|X_{n, k}\right| \leqslant \eps\right\}\right) = \E\left(\left|X_{n, k}\right| \cdot X_{n, k} ^2 \1\left\{\left|X_{n, k}\right| \leqslant \eps\right\}\right) \leqslant
+\\
+\leqslant \E\left(\eps X_{n, k} ^2 \1\left\{\left|X_{n, k}\right| \leqslant \eps\right\}\right) = \eps\E\left(X_{n, k} ^2 \1\left\{\left|X_{n, k}\right| \leqslant \eps\right\}\right) \leqslant \eps\E X_{n, k} ^2 = \eps\sigma_{n, k}^2
+\end{multline*}
+Равенство в конце последней строчки выполнено, поскольку случайные величины центрированные.\\
+Если $Z \sim N(0, \sigma^2)$, то 
+$$
+\E\left|Z\right|^3 = \int\limits_{-\infty}^{+\infty}\frac{|x|^3}{\sigma\sqrt{2\pi}}e^{-\frac{x^2}{2\sigma^2}}\,dx = 2 \int\limits_{0}^{+\infty}\frac{x^3}{\sigma\sqrt{2\pi}}e^{-\frac{x^2}{2\sigma^2}}\,dx =  2 \sigma^3\int\limits_{0}^{+\infty}\frac{u^3}{\sqrt{2\pi}}e^{-\frac{u^2}{2}}\,du = \frac{4\sigma^3}{\sqrt{2\pi}}
+$$
+Последние два перехода выполнены с помощью замены $u = \frac{x}{\sigma}$ и интегрирования по частям.\\
+Отсюда получаем:
+$$
+\sum_{k = 1}^{m_n}\E\left(\left|Y_{n, k}\right|^3\right) \leqslant \frac{4}{\sqrt{2\pi}}\sum_{k = 1}^{m_n}\sigma_{n, k}^3 \leqslant 2\max_{k = 1, \ldots, m_n}\sigma_{n, k}\sum_{k = 1}^{m_n}\sigma_{n, k}^2.
+$$
+При этом $\sum\limits_{k = 1}^{m_n}\sigma_{n, k}^2 \to \sigma^2$ по условию. Также 
+\begin{multline*}
+\sigma_{n, k}^2 = \E X_{n,k}^2 = \E\left(X_{n, k} ^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right) + \E\left(X_{n, k} ^2 \1\left\{\left|X_{n, k}\right| \leqslant \eps\right\}\right) \leqslant
+\\
+\leqslant \E\left(X_{n, k} ^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right) + \eps^2 = \mathcal{L}_n(\eps) + \eps^2 \implies \max_{k = 1, \ldots, m_n}\sigma_{n, k} \leqslant \mathcal{L}_n(\eps) + \eps^2 \underset{n \to \infty}{\to} \eps^2
+\end{multline*}
+Тогда для достаточно большого номера $n$ верно, что $\max\limits_{k = 1, \ldots, m_n}\sigma_{n, k} \leqslant \frac{3}{2}\eps^2$.
+Итого получаем, что для любого фикcированного вещественного $t$ и достаточно большого $n$ верно неравенство:
+\begin{multline*}
+\left|\phi_{S_n}(t) - \phi_{T_n}(t)\right| \leqslant t^2\mathcal{L}_n(\eps) + \eps\left|t\right|^3\sum_{k = 1}^{m_n}\sigma_{n, k}^2 + 2|t|^3\max_{k = 1, \ldots, m_n}\sigma_{n, k}\sum_{k = 1}^{m_n}\sigma_{n, k}^2 \leqslant
+\\
+ \leqslant t^2\mathcal{L}_n(\eps) + \eps\left|t\right|^3\sum_{k = 1}^{m_n}\sigma_{n, k}^2 + 3|t|^3\eps^2\sum_{k = 1}^{m_n}\sigma_{n, k}^2 \underset{n \to \infty}{\to} \eps\left|t\right|^3\sigma^2 + 3|t|^3\eps^2\sigma^2
+\end{multline*}
+В силу произвольности $\eps$ получаем требуемый поточечный предел:
+$$
+\left|\phi_{S_n}(t) - \phi_{T_n}(t)\right| \underset{n \to \infty}{\to} 0
+$$
+\end{proof}
+\begin{theorem}\label{lect13:theorem2}(Феллер)\\
+Пусть даны серии независимых случайных величин $X_{n, 1}, \ldots, X_{n, m_n}, \\ \forall k \,\E X_{n,k} = 0$, $\var X_{n,k} = \sigma_{n, k}^2$. Пусть $\sum\limits_{k = 1}^{m_n}\sigma_{n, k}^2 \to \sigma^2 \geqslant 0$. Предположим, что
+$$
+\boxed{\max\limits_{k = 1, \ldots, m_n}\sigma_{n, k}^2 \to 0, \, n\to\infty}
+$$
+Если $S_n \to N(0, \sigma^2)$, то справедливо условие Линдеберга.\\
+Иначе говоря, для таких случайных величин, которые удовлетворяют условию пренебрежимой малости (обведено в рамку) выполнение условия Линдеберга необходимо и достаточно для справедливости Центральной предельной теоремы \ref{lect13:theorem1}.
+\end{theorem}
+\begin{theorem}\label{lect13:theorem3}(Ляпунов)\\
+Пусть для массива независимых случайных величин $X_{n, 1}, \ldots, X_{n, m_n}\\ \forall k \,\E X_{n,k} = 0,\, \E \left|X_{n,k}\right|^s < \infty$ для некоторого $s > 2$ (в теореме \ref{lect13:theorem1} $s = 2$). Как и ранее, предполагаем, что $\sum\limits_{k = 1}^{m_n} \sigma_{n, k}^2 \underset{n \to \infty}{\to} \sigma^2 \geqslant 0$, где $\sigma_{n, k}^2 = \var X_{n, k}$. Тогда из условия Ляпунова $\sum\limits_{k = 1}^{m_n}\E \left|X_{n, k}\right|^s \to 0, \, n \to \infty$ следует справедливость центральной предельной теоремы \ref{lect13:theorem1}, то есть
+$$
+S_n \overset{\mathcal{D}}{\to} Z~\sim~N(0, \sigma^2).
+$$
+\end{theorem}
+\begin{proof}
+По определению функции Ляпунова
+$$
+\mathcal{L}_n(\eps) = \sum_{k = 1}^{m_n}\E\left(X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right).
+$$
+Оценим каждое из слагаемых следующим образом
+\begin{multline*}
+X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\} \leqslant \frac{\left|X_{n, k}\right|^{s-2}}{\eps^{s-2}} X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\} = \frac{\left|X_{n, k}\right|^s}{\eps^{s-2}}\1\left\{\left|X_{n, k}\right| > \eps\right\}\leqslant
+\\
+\leqslant \frac{\left|X_{n, k}\right|^s}{\eps^{s-2}} \implies \E\left(X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right) \leqslant \frac{1}{\eps^{s-2}}\E\left|X_{n, k}\right|^s
+\end{multline*}
+А тогда
+$$
+\mathcal{L}_n(\eps) \leqslant \frac{1}{\eps^{s-2}}\sum\limits_{k = 1}^{m_n}\E \left|X_{n, k}\right|^s \underset{n \to \infty}{\to} 0
+$$
+Применяя теорему \ref{lect13:theorem1}, получаем требуемое.
+\end{proof}
+\begin{theorem}\label{lect13:theorem4}
+Пусть $X_1, X_2, \ldots$ "--- последовательность независимых одинаково распределённых случайных величин таких, что \\$\E X_1 = a,~\var X_1 = \sigma^2 \geqslant 0$. Тогда 
+$$
+\frac{S_n - na}{\sqrt{n}} \overset{\mathcal{D}}{\to} W \sim N(0, \sigma^2), \, n \to \infty,
+$$
+где $S_n = X_1 + \ldots + X_n$.
+\end{theorem}
+\begin{proof}
+Введём схему серий. $X_{n, k} := \frac{X_k - a}{\sqrt{n}}, \, k = 1, \ldots, n$. Для такой схемы $m_n = n$. Тогда $\frac{S_n - na}{\sqrt{n}} = \sum\limits_{k = 1}^n X_{n, k}$. Подстановкой $X_{n, k}$ по определению убеждаемся, что $\sum\limits_{k = 1}^n \var X_{n, k} = \sigma^2$. Теперь достаточно проверить условие Линдеберга.  
+$$
+\mathcal{L}_n(\eps) = \sum\limits_{k = 1}^n \E \left(X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right)  =\E\left(\left(X_1 - a\right)^2\1\left\{\left|X_1 - a\right| > \eps\sqrt{n}\right\}\right)
+$$
+Последнее равенство выполнено в силу одинаковой распределённости случайных величин и тождества $X_{n, k}^2 = \left(\frac{X_k - a}{\sqrt{n}}\right)^2 = \frac{(X_k - a)^2}{n}$. \\По теореме Лебега о мажорируемой сходимости
+$$
+\E\left(\left(X_1 - a\right)^2\1\left\{\left|X_1 - a\right| > \eps\sqrt{n}\right\}\right) \underset{n \to \infty}{\to} 0
+$$
+\end{proof}
+\begin{theorem}\label{lect13:theorem5}
+Пусть $X_1, X_2, \ldots$ "--- последовательность независимых случайных величин (не обязательно одинаково распределённых) таких, что $\left|X_n\right| \leqslant K$ для некоторого $K$ и всех $n$. Предположим, что \\$\var S_n \to \infty, \, n \to \infty$, где $S_n = X_1 + \ldots + X_n$.
+Тогда
+$$
+\frac{S_n - \E S_n}{\sqrt{\var S_n}} \overset{\mathcal{D}}{\to} Z \sim N(0, 1), \, n \to \infty
+$$
+\end{theorem}
+\begin{proof}
+Из ограниченности случайных величин следует существование и конечность матожиданий, а также сущестование конечных дисперсий. 
+В силу независимости
+$$
+\var S_n = \sum_{k = 1}^n \var X_k,
+$$
+то есть для всякого $n$ у величины $S_n$ существует конечная дисперсия.
+Заметим, что  случай, когда все $X_n$ являются почти наверно константами невозможен, поскольку в этом и только в этом случае $\var S_n$ равен $0$ для всякого $n$, что противоречит стремлению дисперсии к бесконечности. 
+Поскольку есть $X_N$, не являющийся тождественной константой, получаем существование ненулевой дисперсии у $S_n$ начиная с номера $N$. 
+\\Рассмотрим схему серий 
+$$
+X_{n, k} := \frac{X_k - \E X_k}{\sqrt{\var S_n}}, \, k = 1, \ldots, n.
+$$
+Проверим для неё выполнение условий теоремы \ref{lect13:theorem1}. 
+\begin{multline*}
+\sum_{k = 1}^n \var X_{n, k} = \frac{1}{\var S_n} \sum_{k = 1}^n \var \left( X_k - \E X_k \right) =  \frac{1}{\var S_n} \sum_{k = 1}^n  \var X_k = 1 = \sigma^2.
+\\
+\mathcal{L}_n(\eps) = \sum\limits_{k = 1}^n \E \left(X_{n, k}^2 \1\left\{\left|X_{n, k}\right| > \eps\right\}\right) = 
+\\
+ \frac{1}{\var S_n} \sum_{k = 1}^n \E \left(\left(X_k - \E X_k\right)^2 \1\left\{\left|X_k - \E X_k \right| > \eps \sqrt{\var S_n}\right\}\right) \leqslant
+\\
+\leqslant  \frac{1}{\var S_n} \sum_{k = 1}^n \E \left(4K^2 \1\left\{\left|X_k - \E X_k \right| > \eps \sqrt{\var S_n}\right\}\right) =
+\\
+ = \frac{4K^2}{\var S_n} \sum_{k = 1}^n \P \left(\left\{\left|X_k - \E X_k \right| > \eps \sqrt{\var S_n}\right\}\right)
+\end{multline*}
+По неравенству Бьенеме"--~Чебышёва:
+$$
+\frac{4K^2}{\var S_n} \sum_{k = 1}^n \P \left(\left\{\left|X_k - \E X_k \right| > \eps \var S_n\right\}\right) \leqslant \frac{4K^2}{\var S_n} \sum_{k = 1}^n \frac{\var X_k}{\var S_n \eps^2} = \frac{4K^2}{\eps^2\var S_n} \to 0.
+$$
+Таким образом выполнено условие теоремы Линдеберга, а поскольку $\sigma^2 = 1$, то получаем требуемое.
+\end{proof}
+
+\subsection{Неклассические условия ЦПТ}
+
+Рассмотренные выше условия предельной теоремы называются классическими. Главное из них "--- пренебрежимая малость слагаемых (дисперсий $\sigma_{n, k}$). Обсудим необходимые и достаточные условия без этого предположения.
+
+Пусть $\left\{X_{n, k}\right\}$ и $\left\{Y_{n, k}\right\}$ "--- те же массивы, что и в доказательстве теоремы Линдеберга \ref{lect13:theorem1} и $\sum\limits_{k = 1}^{m_n}\var X_{n, k} \to \sigma^2 \geqslant 0$.
+\begin{theorem}\label{lect13:theorem6}(Золотарёв, Ротарь)
+Для описанных выше массивов случайных величин и во введённых ранее обозначениях 
+\begin{multline*}
+S_n \overset{\mathcal{D}}{\to} Z \sim N(0, \sigma^2),\, n \to \infty \iff
+\\
+\iff \forall \eps > 0 \, \sum_{k = 1}^{m_n} \int\limits_{\left\{|x| \geqslant \eps\right\}} |x| \left|F_{n, k}(x) - \Phi_{n, k}(x)\right|\, dx \underset{n \to \infty}{\to} 0,
+\end{multline*}
+где $F_{n, k}(x)$ "--- функция распределения $X_{n, k}$, $\Phi_{n, k}(x)$ "--- функция распределения $Y_{n, k}$.
+\end{theorem} 
+Доказательство данной теоремы сложно и объёмно, поэтому не приводится.
+\subsection{Метод Стейна}
+Метод Стейна на сегодняшний день является наиболее мощным методом доказательства не только предельных, но и многих других теорем.
+
+Возьмём $h \in \text{Lip}(1)$, то есть $\left|h(x) - h(y)\right| \leqslant \left|x - y\right|$.
+\begin{definition}\label{lect13:def1}
+\textit{Уравнением Стейна} называется дифференциальное уравнение на функцию $f(x), \, x \in \R$ следующего вида:
+$$
+f'(x) - xf(x) = \underbrace{h(x) - \E h(W)}_{g(x)},
+$$
+где $W \sim N(0, 1)$.
+\end{definition}
+Решение уравнения Стейна "--- функция $f_h(x)$ "--- может быть найдена в явном виде и задаётся формулой
+$$
+f_h(x) = e^{\frac{x^2}{2}}\int\limits_{-\infty}^x g(t)e^{-\frac{t^2}{2}}\, dt.
+$$
+Действительно, продифференцируем эту функцию:
+$$
+f_h'(x) = xe^{\frac{x^2}{2}}\int\limits_{-\infty}^x g(t)e^{-\frac{t^2}{2}}\, dt + e^{\frac{x^2}{2}}g(x)e^{-\frac{x^2}{2}} = xf_h(x) + g(x),
+$$
+значит это решение.
+
+\textbf{Задача.}~~Можно получить оценки для $\left\|f_h'(x)\right\|_{\infty}$ и $\left\|f_h''(x)\right\|_{\infty}$. В частности $\left\|f_h''(x)\right\|_{\infty} \leqslant 2$. Это не очень простая, но сугубо техническая работа. Это нужно понимать на экзамене, но не обязательно уметь детально доказывать.
+
+Само существование $f_h$ следует из скорости роста $h$: эта функция растёт не быстрее линейной.
+
+Теперь вместо $x$ подставим в уравнение случайную величину $X$, например $X = \frac{S_n}{\sqrt{n}}$.  Возьмём математическое ожидание от обеих частей и получим:
+$$
+\E\left(f'\left(X\right) - Xf\left(X\right)\right) = \E h\left(X\right) - \E h\left(W\right)
+$$
+
+Метод Стейна состоит в том, чтобы оценить разность функционалов от гауссовской случайной величины и случайной величины $X$ с помощью оценки левой части в тождестве выше.
+
+\subsection{Доказательство ЦПТ методом Стейна}
+
+Далее рассматриваем в уравнении Стейна $h \in C^1\left(\R\right)$ и $\|h'\| \leqslant c < \infty$. Отсюда следует липшицевость $h$ на $\R$.
+
+Приведём нужную в дальнейшем лемму без доказательства.
+
+\begin{lemma}\label{lect14:lemma1}
+Пусть  $\|h'\| \leqslant c < \infty$ и $f_h$ "--- соответвствующее решение уравнения Стейна. Тогда 
+$$
+\|f_h\| \leqslant 2\|h'\|, \, \|f_h'\| \leqslant c_1\|h'\|, \, \|f_h''\| \leqslant c_2\|h'\|,
+$$
+более того: $c_1 = \sqrt{\frac{2}{\pi}}, \, c_2 = 2$.
+\end{lemma}
+
+Для нас существенным является лишь ограниченность $f_h$ и её производных некоторыми константами, а не их численные значения этих констант.
+
+\begin{theorem}
+    Пусть $X_1, X_2, \dots$ -- н.о.р. случайные величины, $\forall k \ X_k~\in~L^3$, $\E X_k = 0, \var X_k = 1$.
+    Тогда $\forall h\colon \left\|h'\right\| < \infty$
+    \begin{equation*}
+        \left|\E h(T_n) - \E h(W)\right| \leq \tilde C \frac{1+\E X_1^3}{\sqrt{n}}, \qquad T_n:=\frac{X_1+\dots+X_n}{\sqrt{n}}, \ W\sim N(0, 1)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Из уравнения Стейна\begin{equation*}
+        \left|\E h(T_n) - \E h(W)\right| = \left|\E \left(f'(T_n)-T_n f(T_n)\right)\right|
+    \end{equation*}
+    Оценим правую часть. 
+    \begin{equation*}
+        T_n = \frac{X_1}{\sqrt{n}} + U_n, \qquad U_n:=\frac{X_2 + \dots + X_n}{\sqrt{n}}
+    \end{equation*}
+    и в силу независимости и одинаковой распределённости
+    \begin{equation*}
+        \E (T_n f(T_n)) = \sqrt{n}\E (X_1f(T_n))
+    \end{equation*}
+    $f\in C^2 \implies $ справедлива формула Тейлора:
+    \begin{equation*}
+        f(T_n) = f(U_n)+f'(U_n)\frac{X_1}{\sqrt{n}} +f''(\xi_n)\frac{X_1^2}{2n}, \ \xi_n \in \left[\min(U_n, T_n), \max(U_n, T_n)\right]
+    \end{equation*}
+    Ясно, что $\E f''(\xi_n) \frac{X_1^2}{n} < \infty$.
+    \begin{equation*}
+        \sqrt{n}\left|\E X_1f''(\xi_n)\frac{X_1^2}{2n}\right|\leq \frac{\tilde C_1}{\sqrt{n}} \to 0
+    \end{equation*}
+    Из следствия леммы о группировке и н.о.р. $(X_k)$
+    \begin{equation*}
+        \sqrt{n}\E X_1 f(U_n) = \sqrt{n} \E X_1 \E f(U_n) = 0
+    \end{equation*}
+    Оценим оставшуюся часть:
+    \begin{equation*}
+        \left| \E f'(T_n)-f'(U_n) \right| \leq \E \left|\frac{f''(\xi_n)}{2} \frac{X_1^2}{n} \right| \to 0
+    \end{equation*}
+    
+    Таким образом, $T_n \overset{\mathcal{D}}{\to} N(0, 1)$
+\end{proof}
+
+
+

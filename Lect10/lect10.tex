@@ -1,0 +1,191 @@
+\section{Закон больших чисел}
+	\subsection{Простейший вариант закона больших чисел}
+		\begin{lemma}\label{lect10:lemma1}
+			(Неравенство Бьенеме - Чебышева)
+			Если $\var X < +\infty$, то \begin{equation*}
+				\forall \varepsilon > 0 \quad \P(\left|X-\E X\right|\geq \varepsilon) \leq \frac{\var X}{\varepsilon^2}
+			\end{equation*}
+		\end{lemma}
+		\begin{proof}
+			Это неравенство является тривиальным следствием из неравенства Маркова (теорема \ref{lect8:th1})
+		\end{proof}
+		\begin{theorem}\label{lect10:th1}
+			(Бернулли)\footnote{На семинарах у некоторых групп это называется ЗБЧ в форме Чебышева, а случай н.о.р. бернуллиевских сл.в. -- теоремой Бернулли}
+			Пусть $X_1, X_2, \dots$ --- последовательность независимых случайных величин таких, что $\exists \ C>0\colon \forall n \ \var X_n \leq C$.
+			Тогда 
+			\begin{equation*}
+				\frac{1}{n}\sum_{k=1}^{n} \left(X_k - \E X_k\right) \xrightarrow{\P} 0
+			\end{equation*}
+			Если же $X_1, X_2, \dots$ --- независимые одинаково распределенные случайные величины, $\var X_1 < +\infty$, то
+			\begin{equation*}
+				\frac{1}{n}\sum_{k=1}^{n} X_k \xrightarrow{\P} \E X_1
+			\end{equation*}
+			В частности, если $\forall k \ X_k \sim Be(p)$, то 
+			\begin{equation*}
+				\frac{1}{n}\sum_{k=1}^{n} X_k \xrightarrow{\P} p
+			\end{equation*}
+		\end{theorem}
+		\begin{proof}
+			Пусть $S_n:=\sum_{k=1}^{n} X_k$.	Из неравенства Чебышева (лемма \ref{lect10:lemma1})  получаем
+			\begin{multline*}
+				\P\left(\left|\frac{S_n}{n} -\frac{\E S_n}{n}\right|\geq \varepsilon\right) = \P\left(\left|\frac{S_n}{n} -\E\frac{ S_n}{n}\right|\geq \varepsilon\right)\leq\frac{\var \frac{S_n}{n}}{\varepsilon^2} =\frac{1}{\varepsilon^2 n^2}\var S_n =\\= \frac{1}{\varepsilon^2 n^2} \sum_{k=1}^{n} \var X_k
+				\leq\frac{1}{\varepsilon^2 n^2} C n = \frac{C}{\varepsilon^2 n} \xrightarrow[n\to \infty]{}0
+			\end{multline*}
+		\end{proof}
+		\begin{nb}
+			Из хода доказательства теоремы \ref{lect10:th1} видно, что достаточно требовать попарной независимости $\left(X_k\right)$. Более того, можно требовать, чтобы $\forall \ i\neq j \quad \cov(X_i, X_j) = 0$
+		\end{nb}
+	\subsection{Вероятностное доказательство теоремы Вейерштрасса о равномерном приближении непрерывных на отрезке функций}
+		\begin{theorem}\label{lect10:th2}
+			(Вейерштрасс)
+			Пусть $f$ непрерывна на $[a, b]$. Тогда $\forall \varepsilon > 0$\begin{equation*}
+				\exists P_n(x)\in \mathbb{R}[x], \operatorname{deg} P_n = n: \quad \sup_{[a, b]}\left|f - P_n\right|<\varepsilon
+			\end{equation*}
+		\end{theorem}
+		\begin{proof}
+			Понятно, что достаточно доказать теорему только для непрерывных на $[0, 1]$ функций.
+			Введем многочлены Бернштейна следующим образом:
+			\begin{equation*}
+				B_n(f; p):=\sum_{k=0}^{n} f(\tfrac{k}{n})C_n^k p^k (1 - p)^{n-k}, \quad B_n(f; 0) := f(0), B_n(f; 1) = f(1)
+			\end{equation*}
+			Покажем, что $B_n(f; p)$ сходится равномерно к $f$ на $[0, 1]$ при $n\to +\infty$:
+
+			Для этого рассмотрим последовательность независимых одинаково распределённых случайных величин $X_1, X_2, \dots$: $\forall k\in\mathbb{N} \ X_k \sim Be(p)$, $S_n :=\sum_{k=1}^{n} X_k$
+			Знаем, что $\P(S_n = k) = C_n^k p^k (1-p)^{n-k},\quad k = 0, 1, \dots, n$. Рассмотрим $p\in\left(0, 1\right)$:
+			\begin{align*}
+				&\left|f(p)-B(f;p)\right|=\left|\sum_{k=0}^{n} \left(f\left(p\right)-f\left(\frac{k}{n}\right)\right) C_n^k p^k (1 - p)^{n-k}\right|\\
+				& f\in C[0, 1] \implies f\in UC[0, 1] \implies \exists \ M > 0\colon |f|\leq M \text{ на } [0, 1]
+			\end{align*}
+			Фиксируем $p\in[0,1]$:
+			\begin{multline*}
+				\left|f(p)-B(f;p)\right| \leq \left|\sum_{k\colon |p-\frac{k}{n}|<\delta} \left(f\left(p\right)-f\left(\frac{k}{n}\right)\right) C_n^k p^k (1 - p)^{n-k}\right|+\\+
+				\left|\sum_{k\colon |p-\frac{k}{n}|\geq\delta} \left(f\left(p\right)-f\left(\frac{k}{n}\right)\right) C_n^k p^k (1 - p)^{n-k}\right|\leq  \sum_{k\colon |p-\frac{k}{n}|<\delta} \frac{\varepsilon}{2} C_n^k p^k (1 - p)^{n-k} +\\+
+				2M \sum_{k\colon |p-\frac{k}{n}|\geq\delta} C_n^k p^k (1 - p)^{n-k}\leq \frac{\varepsilon}{2} + 2M\sum_{k\colon |p-\frac{k}{n}|\geq\delta} P(S_n = k) =\\=\frac{\varepsilon}{2}+P\left(\left|\frac{S_n}{n} - p\right|\geq \delta\right)
+			\end{multline*}
+			Из неравенства Чебышева (лемма \ref{lect10:lemma1}) получаем
+			\begin{equation*}
+				\frac{\varepsilon}{2}+\P\left(\left|\frac{S_n}{n} - p\right|\geq \delta\right)\leq \frac{\varepsilon}{2} + \frac{M}{2n\delta^2}
+			\end{equation*}
+			Выбираем $n>\frac{M}{\varepsilon \delta^2}$, получаем оценку $\left|f(p)-B(f;p)\right|<\varepsilon$.
+		\end{proof}
+	\subsection{Усиленный закон больших чисел}
+		\begin{theorem}
+			(Райхман)
+			Пусть $X_1, X_2, \dots$ --- последовательность таких случайных величин, что $\exists C > 0\colon\quad \forall k\in\mathbb{N} \ \var X_k \leq C$. Предположим, что $\forall i\neq j \ \cov (X_i, X_j)=0$. Тогда для $S_n:=X_1+\dots + X_n$ выполнено
+			\begin{equation*}
+				\frac{S_n - \E S_n}{n} \xrightarrow[n\to +\infty]{\text{п.н.}} 0
+			\end{equation*}
+		\end{theorem}
+		\begin{proof}
+			Без ограничения общности рассуждений рассматриваем центрированные случайные величины, т.е. $\forall k \quad \E X_k = 0$. 
+			Рассмотрим натуральную последовательность $m_n:$
+			\begin{equation*}
+				m_n^2\leq n < (m_n+1)^2
+			\end{equation*}
+			Тогда
+			\begin{equation*}
+				\frac{|S_n|}{n}\leq \frac{|S_{m_n^2}|+|Z_{m_n^2}|}{m_n^2},\qquad Z_{m_n^2}:=\max_{k=0, \dots, 2m-1} \left|X_{m_n^2+1}+\dots + X_{m_n^2+1+k}\right|
+			\end{equation*}
+			Понятно, что достаточно проверить
+			\begin{align*}
+				& \frac{S_{m_n^2}}{m_n^2} \xrightarrow{\text{п.н.}} 0, \qquad n\to +\infty \\
+				& \frac{Z_{m_n^2}}{m_n^2} \xrightarrow{\text{п.н.}} 0, \qquad n\to +\infty
+			\end{align*}
+			Берем произвольный $\varepsilon > 0$.
+			\begin{multline*}
+				\sum_{m=1}^{+\infty} \P\left(\frac{|S_{m^2}|}{m^2}\geq \varepsilon\right) \leq \sum_{m=1}^{+\infty}\frac{\var S_m}{\varepsilon^2 m^4}\leq\\\leq \sum_{m=1}^{+\infty} \frac{C m^2}{\varepsilon^2 m^4}=\sum_{m=1}^{+\infty} \frac{C}{\varepsilon^2 m^2} = \frac{C}{\varepsilon^2 m^2}\sum_{m=1}^{+\infty} \frac{1}{m^2}<\infty
+			\end{multline*}
+			По лемме \ref{lect04:lemma3} Бореля-Кантелли с вероятностью $0$ произойдет бесконечное число событий $\left\{\frac{|S_{m^2}|}{m^2}\geq \varepsilon\right\}$. Следовательно, c вероятностью $1$ произойдет кроме быть может конечного числа  $\left\{\frac{|S_{m^2}|}{m^2}< \varepsilon\right\}$.
+			Получаем, что \begin{equation*}
+				\frac{S_{m_n^2}}{m_n^2} \xrightarrow{\text{п.н.}} 0, \qquad n\to +\infty
+			\end{equation*}
+			Аналогичным путём получается оценка и для $Z_{m^2}$
+		\end{proof}
+		\begin{lemma}\label{lect10:lemma2}
+			Для любой случайной величины $X$ справедливо двойное неравенство:
+			\begin{equation*}
+				\sum_{n=1}^{+\infty} \P\left(|X|\geq n\right) \leq \E |X| \leq 1 +\sum_{n=1}^{+\infty} \P\left(|X|\geq n\right) 
+			\end{equation*}
+		\end{lemma}
+		\begin{proof}
+			\begin{multline*}
+				\sum_{n=1}^{+\infty} \P\left(|X|\geq n\right) = \sum_{n=1}^{+\infty} \sum_{k\geq n} \P\left(k \leq |X|<k+1\right) =\\= \sum_{k=1}^{+\infty} k \P\left(k \leq |X|<k+1\right) = \sum_{k=1}^{+\infty} \E \left(k \1 \left(k\leq |X| < k+1\right) \right)\leq\\\leq
+				\sum_{k=1}^{+\infty} \E \left(|X| \1 \left(k\leq |X| < k+1\right) \right) = \E |X| = \dots
+			\end{multline*}
+		\end{proof}
+		Из курса математического анализа знаем, что справедлива
+		\begin{lemma}\label{lect10:lemma3}
+			(Тёплиц)
+			Пусть $a_1, a_2, \dots$ такова, что $a_r\to a < \infty$. Тогда $\frac{1}{n} \sum_{r=1}^{n} a_r \xrightarrow[n\to\infty]{} a$.
+		\end{lemma}
+		\begin{theorem}\label{lect10:th4}
+			(Колмогоров)
+			Пусть $X_1, X_2, \dots$ --- независимые одинаково распределенные случайные величины, $S_n = X_1 + \dots + X_n$. Тогда 
+			\begin{equation*}
+				\frac{S_n}{n}\xrightarrow[n\to +\infty]{\text{п.н.}} c\in\mathbb{R} \iff \exists \E X_1 = c.
+			\end{equation*}
+		\end{theorem}
+		\begin{proof}
+			Покажем достаточность. Без ограничения общности рассуждений рассмотрим неотрицательные случайные величины $X_k\in L^1$.
+			Введём $Y_r := X_r \1 (0\leq X_r \leq r), \quad r\in\mathbb{N}$.
+			Положим $T_n:= \sum_{r=1}^{n}Y_r$.
+			Пусть для $\alpha > 1 \quad k_n:=\left[\alpha^n\right], n\in\N$.
+			Покажем, что 
+			\begin{equation}\label{lect10:th4:eq1}
+				\frac{T_{k_n} - \E T_{k_n}}{k_n} \xrightarrow[n\to\infty]{\text{п.н.}}0.
+			\end{equation} 
+			Фиксируем некоторый $\varepsilon > 0$:
+			\begin{multline}\label{lect10:th4:eq2}
+				\sum_{n\in\N} \P\left(\left|\frac{T_{k_n} - \E T_{k_n}}{k_n}\right|\geq \varepsilon\right) \overset{\text{\tiny{н-во \ref{lect10:lemma1}}}}{\leq} \sum_{n=1}^{+\infty} \frac{\var T_{k_n}}{k_n^2 \varepsilon^2}=\frac{1}{\varepsilon^2}\sum_{n=1}^{\infty}\frac{\sum_{r=1}^{k_n}\var Y_r}{k_n^2}\leq\\\leq
+				\frac{1}{\varepsilon^2}\sum_{n=1}^{\infty} \frac{\sum_{r=1}^{n}\E Y_r^2}{k_n^2} \leq \frac{1}{\varepsilon^2} \sum_{r=1}^{\infty}\E Y_r^2 \sum_{n\colon k_n \geq r}\frac{1}{k_n^2}
+			\end{multline}
+			Поскольку $\forall n \quad \alpha^n-1 < \underbrace{\left[\alpha^n\right]}_{= k_n} \leq \alpha^n$, получаем
+			\begin{multline*}
+				\sum_{n\colon k_n \geq r}\frac{1}{k_n^2} = \sum_{n\colon \left[\alpha^n\right]\geq r} \frac{1}{\left[\alpha^n\right]}\leq \sum_{n\colon \alpha^n \geq r}\frac{1}{(\alpha^n-1)^2} \leq\\\leq C\sum_{n\geq \log_{\alpha} r}\frac{1}{\alpha^{2n}}\leq
+				C \left(\frac{1}{\alpha^2}\right)^{\log_{\alpha} r} \frac{1}{1-\frac{1}{\alpha^2}}\leq \frac{D}{(1+r)^2},
+			\end{multline*}
+			где $C$, $D$ -- какие-то положительные константы, зависящие только от $\alpha$.
+			\begin{equation*}
+				\E Y_r^2 = \E X_r^2\1 (0\leq X_r \leq r) = \int_{\left[0, r\right]} x^2 \P_{X_1}(dx)=\sum_{j=0}^{r-1}\int_{\Delta_j}x^2 \P_{X_1}(dx),
+			\end{equation*}
+			где $\Delta_j := (j, j+1]$, $\Delta_0:=[0, 1]$. Вернемся к \eqref{lect10:th4:eq2} и получим:
+			\begin{multline*}
+				\frac{1}{\varepsilon^2} \sum_{r=1}^{\infty}\E Y_r^2 \sum_{n\colon k_n \geq r}\frac{1}{k_n^2} \leq D\sum_{r=1}^{\infty}\E Y_r^2 \frac{1}{(1+r)^2} =\\= D \sum_{r=1}^{\infty}\frac{1}{(r+1)^2}\sum_{j=0}^{r-1}\int_{\Delta_j}x^2 \P_{X_1}(dx) = D\sum_{j=0}^{\infty}\int_{\Delta_j}x^2 \P_{X_1}(dx)  \sum_{r=j+1}^{\infty}\frac{1}{(r+1)^2} \leq \\\leq
+				D\sum_{j=0}^{\infty}\frac{1}{j+1}\int_{\Delta_j}x \P_{X_1}(dx) = D\int_{\R^+}x \P_{X_1}(dx) = D\ \E X_1<\infty
+			\end{multline*}
+			Итак, по лемме \ref{lect04:lemma3} 
+			\begin{equation*}
+				\frac{T_{k_n} - \E T_{k_n}}{k_n} \xrightarrow[n\to\infty]{\text{п.н.}}0.
+			\end{equation*} 
+
+			По лемме \ref{lect10:lemma3} для $a_r := \E X_r \1 (0\leq X_r \leq r)$ имеем
+			\begin{equation*}
+				\frac{\E T_{k_n}}{k_n}\xrightarrow[n\to\infty]{} \E X_1
+			\end{equation*}
+			и из этого и \eqref{lect10:th4:eq1}
+			\begin{equation*}
+				\frac{T_{k_n}}{k_n}\xrightarrow[n\to\infty]{\text{п.н.}} \E X_1.
+			\end{equation*}
+			Заметим, что 
+			\begin{equation*}
+				\sum_{r=1}^{\infty} \P (Y_r \neq X_r) = \sum_{r=1}^{\infty} \P (X_r > r) \leq \sum_{r=1}^{\infty} \P (X_1 \geq r) \leq 1+ \E X_1 < \infty
+			\end{equation*}
+			По лемме \ref{lect04:lemma3} почти наверное выполняется $Y_r = X_r \quad \forall r > r_0 (\omega)$.
+			Следовательно, $\frac{S_{k_n}}{k_n}\xrightarrow[n\to\infty]{\text{п.н.}} \E X_1$
+			
+			$\forall n\in\N $ найдем $j_n\colon j_n \in \left\{\left[\alpha^m\right], m\in\N\right\}$ и $j_n \leq n < j_{n+1}$.
+			Имеем
+			\begin{align*}
+				& \frac{S_n}{n}\geq \frac{S_{j_n}}{n} = \frac{S_{j_n}}{j_n} \frac{j_n}{j_{n+1}} \\
+				& \frac{S_n}{n}\leq \frac{S_{j_{n+1}}}{n} = \frac{S_{j_{n+1}}}{j_{n+1}} \frac{j_{n+1}}{j_{n}}
+			\end{align*}
+			и, как следствие,
+			\begin{align*}
+				& \liminf_{n\to\infty}\frac{S_n}{n} \geq \E X_1 \cdot \frac{1}{\alpha}\\
+				& \limsup_{n\to\infty}\frac{S_n}{n} \leq \E X_1 \cdot \alpha
+			\end{align*}
+			Устремляя $\alpha\to 1$ получаем равенство
+			\begin{equation*}
+				\lim_{n\to\infty}\frac{S_n}{n} \overset{\text{п.н.}}{=} \E X_1
+			\end{equation*}
+		\end{proof}

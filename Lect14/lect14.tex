@@ -1,0 +1,58 @@
+\section{Многомерное нормальное распределение}
+    Пусть $C\in \R^{n \times n}, C \geq 0, C=C^T, a\in \R^n$ 
+    \begin{definition}
+        Говорят, что случайный вектор $X$ имеет нормальное распределение $N(a, C)$, если его характеристическая функция имеет вид
+        \begin{equation*}
+            \varphi_X (t) = e^{i(a, t) - \frac{1}{2}(Ct, t)}
+        \end{equation*}
+        Аналогично с одномерным случаем,
+        \begin{equation*}
+            \E X = a, \Var X = C
+        \end{equation*}
+    \end{definition}
+    \begin{theorem}
+        $\varphi_X$ -- х.ф.
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item $C > 0\implies \det C \neq 0 \implies \exists A = C^{-1}$
+            \begin{equation*}
+                f(x):=\frac{\sqrt{\det A}}{(2\pi)^{\frac{n}{2}}} e^{-\frac{1}{2}(At, t)}
+            \end{equation*}
+            Покажем, что $f$ -- плотность.
+            
+            Замена переменных: $x-a=:Bu, t =: Bv, B^T C B = diag(d_j) =: D$
+            То есть $B \in \mathcal{O}(R^n)$
+            \begin{equation*}
+                i(t, x-a) -\frac{1}{2}(A(x-a), x-a) = i(u, v) - \frac{1}{2} (D^{-1}u, u)
+            \end{equation*}
+            Формула обращения + теорема Фубини:
+            \begin{multline*}
+                \frac{1}{(2\pi)^{\frac{n}{2}} \sqrt{\det D}}\int_{\R^n} e^{i(v, u) - \frac{1}{2}(D^{-1}u, u)} |\det B| du = \\ =
+                \prod_{k=1}^n \frac{1}{\sqrt{2\pi d_k}} \int_{\R} e^{iv_ku_k - \frac{u_k^2}{2d_k}}du_k = \prod_{k=1}^n e^{-\frac{v_k^2d_k}{2}} = e^{-\frac{1}{2} (Ct, t)}
+            \end{multline*}
+            \begin{nb}
+                $\varphi_{X_k}(v_k) = e^{-\frac{v_k^2d_k}{2}} \implies X_k\sim N(0, d_k)$
+            \end{nb}
+            \item $C \geq 0$. Введем $C_k := C + \frac{1}{k} \mathcal{I}$. Тогда $\forall k \ C_k > 0 \implies$ справедливы выше приведенные рассуждения и по теореме непрерывности предельная функция при $k\to\infty$ тоже будет характеристической.
+        \end{enumerate}
+    \end{proof}
+
+    \begin{col}
+        Пусть $X\sim N(a, C)$. Тогда
+        \begin{equation*}
+            X_1, \dots, X_n \text{-- независимы} \iff  C = diag
+        \end{equation*}
+    \end{col}
+
+    \begin{theorem}
+        (ЦПТ) Пусть $(X_{n, k})$ -- схема серий, $\E X_{n, k} = 0$, 
+        
+        $\sum_{k=1}^{m_n} \Var X_{n,k} \to C$ и выполняется условие Линдеберга:
+        \begin{equation*}
+            \forall \varepsilon > 0 \sum_{k=1}^{m_n} \E \|X_{n, k}\|^2 \1(\|X_{n, k}\| > \varepsilon) \to 0
+        \end{equation*}
+        Тогда \begin{equation*}
+            \sum_{k=1}^{m_n} X_{n, k} \overset{\mathcal{D}}{\to} N(0, C)
+        \end{equation*}
+    \end{theorem}

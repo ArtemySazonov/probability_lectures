@@ -1,0 +1,87 @@
+
+    \section{Характеристические функции}
+        \begin{definition}\label{lect11:def1}
+            Пусть $X$ --- случайная величина. \emph{Характеристической функцией случайной величины $X$} назовем функцию $\varphi_X(t):=\E e^{itX}, \quad t\in\mathbb{R}$
+        \end{definition}
+        \begin{prop}\label{lect11:prop1}
+            $\varphi_X(t) = \E\cos tX +i\E\sin tX$
+        \end{prop}
+        \begin{proof}
+            Следует из формулы Эйлера \begin{equation*}
+                e^{i \phi}=\cos\phi + i\sin\phi
+            \end{equation*}и линейности интеграла Лебега.
+        \end{proof}
+        \begin{definition}\label{lect11:def2}
+            Функция $\psi:\mathbb{R} \rightarrow \mathbb{C}$ называется \emph{неотрицательно определенной}, если
+            \begin{equation*}
+                \forall n\in\mathbb{N}, \ \forall t_1, \dots, t_n\in\mathbb{R},\ \forall z_1, \dots, z_n \in \mathbb{C} \ \ \sum_{k, l = 1}^{n} z_k \overline{z_l} \ \psi(t_k-t_l) \geq 0
+            \end{equation*}
+        \end{definition}
+        \begin{theorem} \label{lect11:th1}
+            Справедливы следующие утверждения:
+
+            \begin{enumerate}
+                \item $\varphi_X(0)=1$
+                \item $\left|\varphi_X(t)\right| \leq 1 \quad \forall t\in\mathbb{R}$
+                \item $\varphi_X(.)$ равномерно непрерывна на $\mathbb{R}$
+                \item $\varphi_X$ является неотрицательно определенной функцией 
+            \end{enumerate}
+        \end{theorem}
+        \begin{proof}
+            \
+            \begin{enumerate}
+                \item $\varphi_X(0)=\E e^{i 0 X} = \E 1 = 1$
+                \item $\left|\E Z\right|\leq \E\left|Z\right|$
+                \item Без ограничения общности рассуждений $h > 0$\begin{multline*}|\varphi_X(t+h)-\varphi_X(t)|=\left|\E e^{i(t+h)X} - \E e^{itX}\right|  =\\= \left|\E e^{itX} \left(e^{ihX}-1\right)\right|\leq 2h \ \displaystyle{\sup_{\mathbb{R}}}\left|X\right|\end{multline*}
+                \item $n\in\mathbb{N}, \ t_1, \dots, t_n \in \mathbb{R}, \ z_1, \dots, z_n \in \mathbb{C}$
+                    \begin{multline*}
+                        \sum_{k, l = 1}^{n} z_k \overline{z_l} \ \varphi_X(t_k-t_l) = \sum_{k, l = 1}^{n} z_k \overline{z_l} \ \E(e^{i(t_k-t_l)X}) =\\=  \sum_{k, l = 1}^{n} z_k \overline{z_l} \ \E(e^{it_kX}e^{-it_lX})
+                        = \sum_{k, l = 1}^{n} z_k \overline{z_l} \ \E(e^{it_kX}\overline{e^{it_lX}}) =\\= \E\left(\sum_{k=1}^{n}z_ke^{it_kX}\cdot \overline{\sum_{l=1}^{n}z_le^{it_lX}}\right)= \E \left|\sum_{k=1}^{n}z_ke^{it_kX}\right|^2\geq 0
+                    \end{multline*}
+            \end{enumerate}
+        \end{proof}
+        Приведем без доказательства следующий факт:
+        \begin{theorem}\label{lect11:th2}
+            (Bohner - Хинчин)
+            $\varphi$ является характеристической функцией тогда и только тогда, когда выполнены следующие условия:
+            \begin{enumerate}
+                \item $\varphi(0)=1$;
+                \item $\varphi\in C(\mathbb{R})$;\footnote{Можно доказать, что достаточно непрерывности в нуле}
+                \item $\varphi$ неотрицательно определенная функция.
+            \end{enumerate}
+        \end{theorem}
+        \begin{theorem}\label{lect11:th3}
+            (Формула обращения)
+            Пусть $\varphi_X$ --- характеристическая функция некоторой случайной величины $X$, $F_X$ --- функция распределения X.
+            Тогда $\forall a, b \in C(F_X)$\footnote{Множество точек непрерывности функции $F_X$} выполнено
+            \begin{equation*}
+                F_X(b) - F_X(a) = \operatorname{v.p. }\frac{1}{2\pi}\int_{-\infty}^{+\infty} \frac{e^{-iat} - e^{-ibt}}{it}\varphi_X(t)dt
+            \end{equation*}
+        \end{theorem}
+        \begin{proof}
+            \begin{equation*}
+                \int_{-C}^{C}\left| \frac{e^{-ita} - e^{-itb}}{it} e^{itx}\right|dx \leq 2C (b-a) \implies
+            \end{equation*}
+            применима теорема Фубини о перестановке повторных интегралов.
+            По теореме Фубини и определению \ref{lect11:def1} характеристической функции,
+            \begin{multline*}
+                \frac{1}{2\pi}\int_{-C}^{C} \frac{e^{-iat} - e^{-ibt}}{it} \varphi_X(t)dt =\\= \frac{1}{2\pi}\int_{-C}^{C} \frac{e^{-iat} - e^{-ibt}}{it} \left(\int_{-\infty}^{+\infty}e^{itx}dF_X(x)\right)dt =\\= \frac{1}{2\pi}\int_{-C}^{C} \left(\int_{-\infty}^{+\infty}\frac{e^{-iat} - e^{-ibt}}{it}e^{itx} dF_X(x)\right)dt=\\
+                =\frac{1}{2\pi}\int_{-\infty}^{+\infty}  \left(\int_{-C}^{C}\frac{e^{-iat} - e^{-ibt}}{it}e^{itx}dt\right)dF_X(x)=\\=
+                \frac{1}{2\pi}\int_{-\infty}^{+\infty}  \left(\int_{-C}^{C}\frac{e^{i(x-a)t} - e^{i(x-b)t}}{it}dt\right)dF_X(x)=\\=
+                \int_{-\infty}^{+\infty} \frac{1}{\pi}\left(\int_{0}^{C(x-a)} \frac{\sin u}{u}du -\int_{0}^{C(x-b)} \frac{\sin u}{u}du\right) dF_X(x)
+            \end{multline*}
+            Обозначим $\psi_C(x) := \frac{1}{\pi}\left(\int_{0}^{C(x-a)} \frac{\sin u}{u}du -\int_{0}^{C(x-b)} \frac{\sin u}{u}du\right)$. Понятно, что
+            \begin{equation*}
+                \lim_{C\to +\infty}\psi_C(x) =: \psi(x) = \left\{
+                    \begin{aligned}
+                    &\tfrac{1}{2}, \qquad x = a \text{ или } x = b \\
+                    & 1, \qquad x\in \left(a, b\right)\\
+                    & 0, \qquad x\notin \left[a, b\right] 
+                \end{aligned}\right.
+            \end{equation*}
+            Тогда из теоремы \ref{lect8:th3} Лебега о мажорируемой сходимости получаем
+            \begin{multline*}
+                \lim_{C\to +\infty}\int_{-\infty}^{+\infty} \psi_C(x)dF_X(x) = \int_{-\infty}^{+\infty} \psi(x)dF_X(x) = \\ = 1 \cdot Q(\left(a, b\right)) + \tfrac{1}{2} \cdot Q(\{a\})+\tfrac{1}{2} \cdot Q(\{b\}) = Q(\left(a, b\right)) = F_X(b)-F_X(a),
+            \end{multline*}
+            где $Q$ --- вероятностная мера, порожденная распределением $F_X$
+        \end{proof}

@@ -1,0 +1,98 @@
+\section{Основные понятия теории вероятностей}
+        \begin{definition}\label{lect01:def1}
+            Система $\mathcal{A}$ подмножеств $\Omega$ называется \emph{алгеброй}, если
+            \begin{enumerate}
+                \item $\varnothing \in \mathcal{A}$
+                \item $A \in \mathcal{A} \implies \Omega \setminus A \in \mathcal{A}$
+                \item $A, B \in \mathcal{A} \implies A \cup B \in \mathcal{A}$
+            \end{enumerate}
+        \end{definition}
+        \begin{definition}\label{lect01:def2}
+            Система $\mathcal{F}$ подмножеств $\Omega$ называется \emph{$\sigma$-алгеброй}, если
+            \begin{enumerate}
+                \item $\varnothing \in \mathcal{F}$
+                \item $A \in \mathcal{F} \implies \Omega \setminus A \in \mathcal{A}$
+                \item $A_1, A_2, ... \in \mathcal{F} \implies \bigcup\limits_{k=1}^{\infty}A_k \in \mathcal{F}$
+            \end{enumerate}
+        \end{definition}
+        \begin{prop}\label{lect01:prop1}
+            $\sigma$-алгебра является алгеброй подмножеств.
+        \end{prop}
+        \begin{proof}
+            Свойства (1) и (2) совпадают. Проверим (3): 
+            \begin{equation*}
+            A, B \in \mathcal{F} \implies A \cup B \cup \varnothing \cup \varnothing \cup ... \in \mathcal{F} \implies A \cup B \in \mathcal{F}
+            \end{equation*}
+        \end{proof}
+        \begin{prop}\label{lect01:prop2}
+            Пересечение любой совокупности $\sigma$-алгебр является $\sigma$-алгеброй.
+        \end{prop}
+        \begin{definition}\label{lect01:def3}
+            $\sigma(M)$ --- наименьшая (по включению) $\sigma$-алгебра, содержащая $M$.
+        \end{definition}
+        \begin{prop}\label{lect01:prop3}
+            $\sigma(M) = \bigcap\limits_\alpha S_\alpha$, $\{S_\alpha\}$ --- все $\sigma$-алгебры, содержащие $M$. 
+        \end{prop}
+        \begin{definition}\label{lect01:def4}
+            Борелевской $\sigma$-алгеброй $\mathcal{B}(S)$ топологического пространства $S$ называется наименьшая $\sigma$-алгебра, содержащая топологию этого пространства.
+        \end{definition}
+        \begin{definition}\label{lect01:def5}
+            Система $\mathcal{M}$ подмножеств $\Omega$ называется $\pi$-системой, если $A, B \in \mathcal{M} \implies A \cap B \in \mathcal{M}$.
+        \end{definition}
+        \begin{definition}\label{lect01:def6}
+            Система $\mathcal{D}$ подмножеств $\Omega$ называется $\lambda$-системой (системой Дынкина), если
+            \begin{enumerate}
+                \item $\Omega \in \mathcal{D}$
+                \item $A, B \in \mathcal{D}, \ A \subseteq B \implies B \setminus A \in \mathcal{D}$
+                \item $A_1, A_2, ... \in \mathcal{D}, \ A_k \uparrow A \implies A \in \mathcal{D}$ (замкнутость), т.е. $A_k \in \mathcal{D}, \ A_n \subseteq A_{n+1} \implies \bigcup\limits_{k=1}^{\infty}A_k \in \mathcal{D}$
+            \end{enumerate}
+        \end{definition}
+        \begin{theorem}\label{lect01:th1}
+            Совокупность $\mathcal{F}$ подмножеств $\Omega$ является $\sigma$-алгеброй тогда и только тогда, когда $\mathcal{F}$ является $\pi$- и $\lambda$-системой.
+        \end{theorem}
+        \begin{proof}
+            $\implies$ Заметим, что $B \setminus A = B \cap (\Omega \setminus A)$. В эту сторону очевидно.\\
+            $\impliedby$ Пусть $\mathcal{F}$ одновременно $\pi$- и $\lambda$-система. $A \in \mathcal{F} \implies \Omega \setminus A \in \mathcal{F}$ (в силу свойств (1) и (2) $\lambda$-системы).  \\
+            $A_n \in \mathcal{F} \implies \bigcup\limits_{k=1}^{N}A_k = {\left({\left(\bigcup\limits_{k=1}^{N}A_k\right)}^C\right)}^C = {\left(\bigcap\limits_{k=1}^{N}{A_k}^C\right)}^C \in \mathcal{F}$\\
+            $\bigcup\limits_{k=1}^{N}A_k \uparrow \bigcup\limits_{k=1}^{\infty}A_k$ при $N \implies \infty$, т.е. $\bigcup\limits_{k=1}^{\infty}A_k \in \mathcal{F}$ по свойству (3) $\lambda$-системы.
+        \end{proof}
+        Обозначим за $\lambda(M)$ наименьшую $\lambda$-систему, содержащую $M$ (заметим, что пересечение любой совокупности $\lambda$-систем --- $\lambda$-система, наименьшая --- пересечение всех, содержащих $M$).
+        \begin{theorem}\label{lect01:th2}
+            Пусть $\pi$-система $\mathcal{M}$ вложена в $\lambda$-систему $\mathcal{D}$. Тогда $\sigma(\mathcal{M}) = \lambda(\mathcal{M}) \subseteq \mathcal{D}$.
+        \end{theorem}
+        \begin{proof}
+            Без ограничения общности $\lambda(\mathcal{M}) = \mathcal{D}$. Пусть $A \in \mathcal{M}$. Обозначим $\mathcal{D}_A := \{ B \subseteq \Omega : A \cap B \in \mathcal{D} \}$ --- нетрудно показать, что это $\lambda$-система. Тогда $\mathcal{D} = \lambda(\mathcal{M}) \subseteq \mathcal{D}_A \implies \forall A \in \mathcal{M}, \ \forall B \in \mathcal{D} \ A \cap B \in \mathcal{D}$. \\
+            $B \in \mathcal{D}, \ \mathcal{D}(B) := \{ A \subseteq \Omega : A \cap B \in \mathcal{D} \}$ --- $\lambda$-система. Т.к. из сказанного выше $\mathcal{M} \subseteq \mathcal{D}(B) \implies \lambda(\mathcal{M}) = \mathcal{D} \subseteq \mathcal{D}(B)$\\
+            $\forall A, B \in \mathcal{D} \ A \cap B \in \mathcal{D} \implies \mathcal{D}$ --- $\pi$-система. По теореме \ref{lect01:th1} $\mathcal{D}$ является $\sigma$-алгеброй. Значит, $\sigma(\mathcal{M}) \subseteq \mathcal{D}$. С другой стороны, $\mathcal{D} = \lambda(\mathcal{M}) \subseteq \sigma(\mathcal{M}) \implies \sigma(\mathcal{M}) = \lambda(\mathcal{M})$.
+        \end{proof}
+        \begin{definition}\label{lect01:def7}
+            \emph{Измеримым пространством} $(S, \mathcal{B})$ называется множество $S$ с выделенной $\sigma$-алгеброй подмножеств $\mathcal{B}$. Множества из $\mathcal{B}$ называются \emph{измеримыми}.
+        \end{definition}
+        \begin{definition}\label{lect01:def8}
+            \emph{Мерой} на $(S, \mathcal{B})$ называется функция $\mu : \mathcal{B} \implies \left[0, +\infty\right] : \forall {B_1, B_2, ...} : B_i \cap B_j = \varnothing \implies \mu(\bigcup\limits_i B_i) = \sum\limits_i \mu(B_i)$.
+        \end{definition}
+        \begin{prop}\label{lect01:prop4}
+            $\mu(\varnothing) = 0 \iff \exists B : \mu(B) < \infty$.
+        \end{prop}
+        \begin{col}\label{lect01:col1}
+            Из счетной аддитивности меры следует конечная аддитивность меры.
+        \end{col}
+        \begin{definition}\label{lect01:def9}
+            \emph{Вероятностной мерой} на $(\Omega, \mathcal{F})$ называется такая счетно-аддитивная мера $P$, что $P(\Omega) = 1$.
+        \end{definition}
+        \begin{definition}\label{lect01:def10}
+            \emph{Вероятностным пространством} называется тройка $(\Omega, \mathcal{F}, P)$, $(\Omega, \mathcal{F})$ --- измеримое пространство, $P$ --- вероятностная мера.
+        \end{definition}
+        \begin{definition}\label{lect01:def11}
+            Говорят, что вероятностное пространство $(\Omega, \mathcal{F}, P)$ \emph{дискретно}, если $|\Omega| \leq |\mathbb{N}|$. 
+        \end{definition}
+        Пусть даны $p_1, p_2, \ldots > 0$, $| \{ p_k \} | = |\Omega|$. Тогда $P(A) = \sum\limits_{k : w_k \in A}p_k$.
+        \begin{lemma}\label{lect01:lemma1}
+            Пусть $I_1, I_2, \dots$ --- последовательность попарно непересекающихся подмножеств $\mathbb{N}$. Тогда $\sum\limits_{k \in \bigcup\limits_n I_n}p_k = \sum\limits_n \sum\limits_{k \in I_n}p_k$.
+        \end{lemma}
+        \begin{theorem}\label{lect01:th3}
+            Если есть вероятностное пространство $(\Omega, \mathcal{F}, P)$, $\mathcal{F} \neq 2^{\Omega}$, то $\exists \widetilde{P}$ на $(\Omega, 2^{\Omega}) : \widetilde{P}|_{\mathcal{F}} \equiv P$. 
+        \end{theorem}
+        \begin{definition}\label{lect01:def12}
+            \emph{(Классическое определение вероятности)} Пусть $|\Omega| = N$, $A \subseteq \Omega$, $|A| = n$. Тогда $P(A) = \frac{n}{N}$. 
+        \end{definition}

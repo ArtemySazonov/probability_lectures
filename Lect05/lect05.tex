@@ -1,0 +1,181 @@
+\section{Случайные величины и их распределения}
+
+\subsection{Случайные элементы}
+\begin{definition}\label{lect05:def1}
+	Пусть $(V, \mathcal{A}), \,(S, \mathcal{B})$ - некоторые измеримые пространства. Отображение $f: V \to S$ называется \textit{$\mathcal{A} | \mathcal{B}$-измеримым}, если $\forall B \in \mathcal{B} \, f^{-1}(B) \in \mathcal{A}$, то есть $f^{-1}(\mathcal{B}) \subseteq \mathcal{A}$.
+	
+	Если  $(V, \mathcal{A}) = (\Omega, \mathcal{F})$ и $X \in \mathcal{F}|\mathcal{B}$, то $X$ называют \textit{случайным элементом}.
+	
+	Если $S = \R^n, \, \mathcal{B} = \mathcal{B}(\R^n), \, X:(\Omega, \mathcal{F}, P) \to (\R^n, \mathcal{B}(\R^n))$, то $X$ называется 
+	\begin{enumerate}
+		\item $n = 1$ при \textit{случайной величиной};
+		\item $n > 1$ при \textit{случайным вектором}.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}\label{lect05:ex1}
+	Индикатор $\1_A(x) = 
+	\begin{cases}
+	1, \, x \in A\\
+	0, \, x \notin A\\
+	\end{cases}\,$ - случайная величина, так как $\1^{-1}(\{1\}) = A \in \mathcal{F}$ и  $\1^{-1}(\{0\}) = A^C \in \mathcal{F}$.        
+\end{example}
+
+\begin{lemma}\label{lect05:lemma1}
+	Пусть $f: V \to S$. Возьмём в $S$ произвольную систему подмножеств $M$ и рассмотрим в $V$ систему $ f^{-1}(M)$. Введём $\mathcal{B} := \sigma \{M\}$, $\mathcal{A} := \sigma\{f^{-1}(M)\}$. Тогда $f \in \mathcal{A}|\mathcal{B}$. Более того, $\sigma \{ f^{-1}(M)\} = f^{-1}(\sigma\{M\})$.
+\end{lemma}
+\begin{proof}\,
+	
+	\fbox{$\supset$}
+	Определим $\mathcal{D}:= \{B \subset S : f^{-1}(B) \in \mathcal{A}\}$. Очевидно, что это $\sigma$-алгебра (так как $\mathcal{A} $ - $\sigma$-алгебра). По построению имеем $M \subseteq \mathcal{D}$ (поскольку $f^{-1}(B) \in \mathcal{A}$) $\implies$ $\sigma\{M\} \subset \mathcal{D}$.
+	
+	Поэтому $f^{-1}(\mathcal{B}) = f^{-1}(\sigma\{M\}) \subset f^{-1}(\mathcal{D}) \subset \mathcal{A} = \sigma \{ f^{-1}(M)\}$.
+	
+	\fbox{$\subset$} Заметим, что $f^{-1}(M) \subset f^{-1}(\mathcal{B})$, поскольку $M \subset \mathcal{B}$. Таким образом, $\sigma\{f^{-1}(M)\}\subset \sigma\{f^{-1}(\mathcal{B})\} = f^{-1}(\mathcal{B}) = f^{-1}(\sigma\{M\})$
+\end{proof}
+
+\begin{col}\label{lect05:col1}
+	Пусть $f^{-1}(M) \subset \mathcal{C}$, где $\, \mathcal{C} \,- $ $\sigma$-алгебра. Тогда $f^{-1}(\sigma\{M\}) \subset \mathcal{C}$
+\end{col}
+\begin{proof}
+	Действительно, $f^{-1}(M) \subset \mathcal{C} \implies \sigma\{f^{-1}M\} \subset \mathcal{C}$. Тогда $f^{-1}(\sigma\{M\}) = \sigma\{f^{-1}(M)\} \subset \mathcal{C}$.
+\end{proof}
+Для проверки $\mathcal{F}|\mathcal{B}$-измеримости $f$ достаточно рассматривать прообразы лишь любой системы, порождающей $\mathcal{B}$.
+\begin{col}\label{lect05:col2}
+	Функция $X: \Omega \to \R$ является случайной величиной $\iff$ выполнено любое из следующих условий
+	\begin{enumerate}
+		\item $\{\omega: X(\omega) \leq x\} \in \mathcal{F} \,\, \forall x \in \R$;
+		\item $\{\omega: X(\omega) < x\} \in \mathcal{F} \,\, \forall x \in \R$;
+		\item $\{\omega: a<X(\omega) <b\} \in \mathcal{F} \,\, \forall a, b  \in \R \,\, (-\infty<a<b<\infty)$.
+	\end{enumerate}
+\end{col}
+\begin{proof}
+	Вспомним, что $\mathcal{B}(\R)$ порождается любой из систем вида $\{ (-\infty, x],  x \in \R\}$, $\{ (-\infty, x),  x \in \R\}$, $\{ (a, b),  x \in \R\}$. Достаточно требовать, чтобы прообразы множеств системы входили в $\sigma$-алгебру $\mathcal{F}$, что и означает, что $X$ - случайная величина.
+\end{proof}
+\begin{definition}\label{lect05:def2}
+	Пусть $V, S$ - топологические пространства, снабжённые соответственно системами открытых множества $\nu$ и $\tau$. Отображение $f: V \to S$ называется \textit{непрерывным}, если $f^{-1}(\tau) \subset \nu$.
+\end{definition}
+\begin{prop}\label{lect05:prop1}
+	Пусть $f: V \to S$ непрерывное отображение топологических просторанств, тогда $f \in \mathcal{B}(V)| \mathcal{B}(S)$
+\end{prop}
+\begin{proof}
+	В силу непрерывности $f$ имеем: $f^{-1}(\tau) \subset \nu \subset \sigma\{\nu\} = \mathcal{B}(V)$, а $\mathcal{B}(S) = \sigma \{\tau\}$. По следствию 1 получаем  необходимое.
+\end{proof}
+\begin{definition}\label{lect05:def3}
+	Функция $f: V \to S$ называется \textit{борелевской}, если $f \in \mathcal{B}(V)|\mathcal{B}(S)$.
+\end{definition}
+Итак, любая непрерывная является борелевской. В частности, если $f: \R^m \to \R^n$ - непрерывна, то $f$ - борелевская.
+\begin{definition}\label{lect05:def4}
+	Функция $X: \Omega \to \overline{\R}$ называется \textit{расширенной случайной величиной}, если $X \in \mathcal{F}|\mathcal{B}(\overline{\R})$, где $\overline{\R} = [-\infty, +\infty]$ и $\mathcal{B}(\overline{\R}) := \{B, B \cup \{+\infty\}, B \cup \{-\infty\}, B \cup \{+\infty\}\cup \{-\infty\} | B \in \mathcal{B}(\R)\}$
+\end{definition}
+\begin{nb}\label{lect05:nb1}
+	$\mathcal{B}(\overline{\R})$ порождается системой $\{ [-\infty, x], x \in \R\}$ или $\{ [-\infty, x), x \in \R\}$. Поэтому $X: \Omega \to \overline{\R}$ является расширенной случайной величной $\iff$  выполнено любое из следующих условий:
+	\begin{enumerate}
+		\item $\{\omega: X(\omega) \leq x\} \in \mathcal{F} \,\, \forall x \in \R$;
+		\item $\{\omega: X(\omega) < x\} \in \mathcal{F} \,\, \forall x \in \R$.
+	\end{enumerate}
+	
+	Любая случайная величина является расширенной случайной величиной.
+\end{nb}
+\subsection{Операции со случайными величинами}
+\begin{theorem}\label{lect05:th1}
+	Пусть $(X_n)_{n \in \N}$ - последовательность (расширенных) случайных величин $X_n : \Omega \to \R$. Тогда (вообще говоря, расширенными) случайными величинами являются:
+	
+	\begin{enumerate}
+		\item $\sup \limits_n X_n,\, \inf \limits_n X_n$;
+		\item $\underset{n}{\lim \sup} X_n,\, \underset{n}{\lim \inf}X_n$;
+		\item $\lim X_n$, если для $\forall \omega \in \Omega$ предел существует.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}\,
+	
+	
+	\begin{enumerate}
+		\item Достаточно убедиться, что $\forall x \in \R \, \{\omega: \sup \limits_n X_n (\omega) \leq x\} \in \mathcal{F}$. Заметим, что $\{\omega: \sup \limits_n X_n (\omega) \leq x\} = \bigcap \limits_n \{\omega: X_n (\omega) \leq x\}$ и каждое $\{\omega: X_n (\omega) \leq x\} \in \mathcal{F}$. Аналогично и для $\inf$: $\{\omega: \inf \limits_n X_n (\omega) < x\} = \bigcup \limits_n \{ \omega : X_n (\omega) < x\}$, где $\{ \omega : X_n (\omega) < x\} \in \mathcal{F}$.
+		\item Заметим, что $\underset{n}{\lim \sup} X_n = \inf \limits_n \sup \limits_{k \geq n} X_k$. По доказанному первому пункту $\sup \limits_{k \geq n} X_k$ является случайной величиной, а также $\inf$ от случайный величин - случайная величина.
+		\item Если $\exists X = \lim \limits_n X_n$ на $\Omega$, то $\lim \limits_n X_n (\omega) = \underset{n}{\lim \sup} X_n (\omega) = \underset{n}{\lim \inf} X_n (\omega)$, а по доказанному второму пункту $\underset{n}{\lim \sup} X_n (\omega)$ и $ \underset{n}{\lim \inf} X_n (\omega)$ являются случайными величинами.
+	\end{enumerate}        
+\end{proof}
+
+\begin{lemma}\label{lect05:lemma2}
+	Пусть имеются $(\mathcal{S}_k, \mathcal{B}_k)$ - измеримые пространства, отображение $f_k : \mathcal{S}_k \to \mathcal{S}_{k+1}$ при $k = 1 , \dots, n-1$. Тогда $f := f_n \circ \dots \circ f_1$ будет $\mathcal{B}_1 | \mathcal{B}_n$-измеримой.
+\end{lemma}
+\begin{proof}
+	Достаточно рассмотреть случай $n = 3$.
+	
+	$\forall B \in \mathcal{B}_3$ имеем $f^{-1}(B) = (f_2 \circ f_1)^{-1}(B) = f^{-1}_1(f^{-1}_2(B))$, где $f^{-1}_2(B) \in \mathcal{B}_2$, а значит $f^{-1}_1(f^{-1}_2(B)) \in \mathcal{B}_1$
+\end{proof}   
+\begin{lemma}\label{lect05:lemma3}
+	Пусть $(\Omega, \mathcal{F})$ и $(\mathcal{S}_k, \mathcal{B}_k)$, где $k = 1, \dots, n$, - измеримые пространства. Рассмотрим $X_k: \Omega \to \mathcal{S}_k$. Отображение $X = (X_1, \dots, X_n) : \Omega \to \mathcal{S}= \mathcal{S}_1 \times \dots \times \mathcal{S}_n$ будет $\mathcal{F}|\mathcal{B}$, где $\mathcal{B} = \sigma \{$брусы вида $B_1 \times \dots \times B_n$,  $B_i \in \mathcal{B}_i \} \iff X_k \in \mathcal{F}|\mathcal{B}_k$ для $k = 1, \dots, n$
+\end{lemma}
+\begin{proof}
+	Введём отображения "проектирования" \, $\pi_k : \mathcal{S} \to \mathcal{S}_k$, где $\pi_k(x_1, \dots, x_n) = x_k$. $\pi_k \in \mathcal{B}|\mathcal{B}_k$, так как прямоугольники порождают $\mathcal{B}$ и $\pi_k(B) = B_k \in \mathcal{B}_k$.
+	
+	
+	\fbox{$\implies$} Пусть $X = (X_1, \dots, X_n) \in \mathcal{F}|\mathcal{B}$. Тогда $X_k = \pi_k \circ X \in \mathcal{F}|\mathcal{B}_k$ - как композиция измеримых.
+	
+	
+	\fbox{$\impliedby$} Пусть $X_k \in \mathcal{F}|\mathcal{B}_k$ для $k = 1, \dots, n$. Тогда для $\forall$ прямоугольников $B = B_1 \times \dots B_n$ имеем $X^{-1}(B) = X^{-1}_1(B_1) \cap \dots \cap X^{-1}_n(B_n) \in \mathcal{F}$.
+	
+\end{proof}   
+\begin{theorem}\label{lect05:th2}
+	Пусть $X$ и $Y$ - случайные величины, то $X+Y$, $X-Y$, $XY$ - случайные величины. Если $Y(\omega) \neq 0 $ $\, \forall \omega \in \Omega$, то $\frac{X}{Y}$ - случайная величина.
+\end{theorem}
+\begin{proof}\,
+	
+	\begin{itemize}
+		\item  По лемме~\ref{lect05:lemma3} отображение $(X, Y): \Omega \to \R^2$ - случайная величина.
+		\item Функция $h(x, y) := x+y$ непрерывна на $\R^2$, следовательно $h \in \mathcal{B}(\R^2)|\mathcal{B}(\R)$. По лемме~\ref{lect05:lemma2} отображение $X + Y = h(X, Y) \in \mathcal{F}|\mathcal{B}(\R)$.
+		\item Остальные случаи рассматриваются аналогично.
+	\end{itemize}      
+	
+\end{proof}
+
+
+\subsection{Распределение случайного элемента}
+\begin{definition}\label{lect05:def5}
+	Пусть $X: \Omega \to S$ - случайный элемент, то есть $\mathcal{F}|\mathcal{B}$-измеримое отображение. \textit{Распределением (или законом распределения)} называется мера на пространстве $(S, \mathcal{B})$, задаваемая формулой $P_X(B) := P(X^{-1}(B))$, $B\in \mathcal{B}$. 
+	
+	Иногда используется следующее обозначение: $law(X)$.
+\end{definition}
+\begin{definition}\label{lect05:def6}
+	\textit{Функция распределения случайного вектора} $X: \Omega \to \R^n$ называется функция $F_X(x) := P(X \in (-\infty, x]) = P(x \in (-\infty, x_1]\times \dots \times (-\infty, x_n]) = P(X_1(\omega) \leq x_1, \dots, X_n(\omega) \leq x_n)$.
+\end{definition}
+\begin{nb}\label{lect05:nb2}
+	Пусть  $(S, \mathcal{B})$-измеримое пространство, снабжённое вероятностной мерой $Q$. Тогда на некотором $(\Omega, \mathcal{F}, P)$ существует случайный элемент $X: \Omega \to S$ такой, что $Law(X) = Q$
+\end{nb}
+\begin{proof}
+	Достаточно взять $(\Omega, \mathcal{F}, P) = (S, \mathcal{B}, Q)$ и $X := I$ - тождественное отображение $(I(\omega) = \omega)$.
+\end{proof}
+
+Для случайного элемента $X: \Omega \to S$ $(X \in \mathcal{F}|\mathcal{B})$ введём $\sigma$-алгебру $\sigma \{X \} \subset \mathcal{F}$, где $\sigma \{X \} = \{ X^{-1}(B) | \, B\in \mathcal{B} \} = X^{-1}(\mathcal{B})$.
+\begin{definition}\label{lect05:def7}
+	Говорят, что случайные элементы $X_t: \Omega \to S_t$, где $(S_t, \mathcal{B}_t) -$ измеримые пространства и $t \in T$, \textit{независимы (в совокупности)}, если независимы порождённые ими $\sigma$-алгебры. Другими словами, если $\forall$ конечного множества $J \subset T$ и всех $B_t \in \mathcal{B}_t, t\in J$ выполняется $P(\bigcap \limits_{t \in J} \{ X_t \in B_t\}) = \prod \limits_{t \in J} P(X_t \in B_t)$.
+\end{definition}
+
+\begin{col}\label{lect05:col3}
+	$X = (X_1, \dots, X_n) $ $-$ случайная величина, имеющая независимые компоненты $\iff F_X(x_1, \dots, x_n) = \prod \limits_{k=1}^n F_{X_k}(x_k)$.
+\end{col}
+\begin{proof}
+	Следует из утверждения про независимость $\sigma$-алгебр, порождённых $\pi$-системами.
+\end{proof}
+\begin{theorem}\label{lect05:th3}(Ломницкий - Улам)\\
+	Пусть $\{ (S_t, \mathcal{B}_t, Q_t),\, t\in T\}$ - произвольное семейство вероятностных пространств. Тогда на некотором $(\Omega, \mathcal{F}, P)$ существует семейство независимых случайных элементов $\{ X_t, \, t\in T\}$ $(X_t: \Omega \to S_t, X_t \in \mathcal{F}|\mathcal{B}_t)$ таких, что $P_{X_t} = Q_t, \, t\in T$.
+	
+	
+	Всегда можно на вероятностном пространстве построить семейство независимых случайных элементов с заданными распределениями.
+\end{theorem}
+
+
+\begin{proof}
+	Запись обсуждения этого с консультации \href{https://youtu.be/3kwPGBBbwM4?list=PLOIJkHeY-5YtXcqKYPMkGBdPIryAOmzad&t=1155}{вот тут}.
+	
+	
+	Вводим $\prod \limits_{t\in T} \mathcal{B}_t$ и это есть наименьшая $\sigma$-алгебра, содержащая все цилиндрические множества (множества вида $B_{t_1} \times \dots B_{t_n}$). Задаём меру на этих прямоугольниках как произведение мер (в силу независимости). 
+	
+	$\sigma$-алгебра, порождённая прямоугольниками, устроена следующим образом: если множество входит в это произведение, то найдётся счётная последовательность точек $t_1, \dots, t_n, \, t_i \in T$, то множество войдет в счетное произведение $\sigma$-алгебр.
+	
+	От мер на прямоугольниках нужно будет перейти к счётным произведениям и заодно понять, почему так заданная мера продолжается на $\sigma$-алгебру, описанную выше.
+	
+	Примерно работа на полтора часа :)))))
+\end{proof}

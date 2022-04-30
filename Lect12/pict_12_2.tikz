@@ -1,0 +1,7 @@
+﻿
+    \begin{tikzpicture}
+        \draw[->] (-2,0) -- (2,0) node[above]{$t$};
+        \draw[->] (0, -1) -- (0, 2) node[right]{$y$};
+        \draw[fill=black] (0,0) circle [radius=2pt] node[above right]{$0$};
+		\draw[thick,color=red](-1.7,0)--(-0.7,0)node[below]{$-\frac{1}{n}$}--(0,1.5)node[right]{$1$}--(0.7,0)node[below]{$\frac{1}{n}$}--(1.7,0)node[above left]{$\varphi_n$};
+    \end{tikzpicture}
