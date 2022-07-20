@@ -1,0 +1,180 @@
+\section{Условное математическое ожидание}
+
+    \subsection{Определение УМО}
+        \subsubsection{УМО неотрицательных случайных величин}
+    
+        Пусть $X$ -- случайная величина, $X\ge0$. 
+        $\mathcal{G}$ -- $\sigma$-алгебра, причём $\mathcal{G}\subset\mathcal{F}$.
+        \begin{definition}\label{extralect:def1}
+            Пусть $X$ -- случайная величина, $X\ge0$. $\mathcal{G}$ -- $\sigma$-алгебра, причём $\mathcal{G}\subset\mathcal{F}$. Тогда её условным математическим ожиданием относительно
+            $\sigma$-алгебры $\mathcal{G}\subset\mathcal{F}$ называется случайная величина $Y$, т. ч.
+            \begin{enumerate}
+                \item $Y$ измерима относительно $\mathcal{G}$
+                \item $\forall A\in \mathcal{G}$ $E[X\mathbbm{1}_{A}] = E[Y\mathbbm{1}_{A}]$ 
+            \end{enumerate}
+            Обозначение: $E[X|\mathcal{G}]$.
+        \end{definition}
+
+        \begin{prop}\label{extralect:prop1}
+            Для неотрицательной случайной величины $X$ существует УМО $E[X|\mathcal{G}]$.
+        \end{prop}
+        \begin{proof}
+            Если $Z_1, Z_2, \ldots$ -- случайные величины, то 
+            \begin{eqnarray}\label{extralect:prop1FirstFact}
+                E\left[\sum\limits_{n=1}^{\infty}Z_n\right]=\sum\limits_{n=1}^{\infty}E Z_n
+            \end{eqnarray}
+            Если $A_1, A_2, \ldots \in \mathcal{G}, A_k A_j=\varnothing$, то
+            \begin{eqnarray}\label{extralect:prop1SecondFact}
+                \mathbbm{1}_{\bigcup{A_i}} = \sum\limits_{n=1}^{\infty}\mathbbm{1}_{A_i}
+            \end{eqnarray}
+            $\forall A \in \mathcal{G}$ определим $Q[A]:=E[X\mathbbm{1}_{A}]$
+            Рассмотрим $Z_n=X\mathbbm{1}_{A_n}$. Подставив в соотношение \ref{extralect:prop1FirstFact}, получим
+            \begin{eqnarray}
+                Q\left[\bigcup\limits_{n=1}^{\infty}A_n\right]=\sum\limits_{n=1}^{\infty}Q[A_n]
+            \end{eqnarray}
+            Таким образом, $Q$ -- мера. 
+            \begin{prop}\label{extralect:prop2}
+                $P[A]=0 \Rightarrow Q[A]=0$
+            \end{prop}
+            \begin{proof}
+                $0\leqslant X_n\uparrow X$ на $\Omega$, $X_n$ -- простые функции.\\
+                 Тогда $\forall n$ $EX_n\mathbbm{1}_{A}=0$, поскольку $P[A]=0$. По теореме о монотонной сходимости,
+                 \begin{eqnarray}
+                    Q[A] = EX\mathbbm{1}_{A} = \lim_{n\to\infty} E X_n\mathbbm{1}_{A}
+                \end{eqnarray} 
+                Таким образом, $Q\ll P$
+            \end{proof}
+            Значит, существует производная Радона-Никодима $\frac{dQ}{dP}$. Она удовлетворяет условиям определения \ref{extralect:def1}.
+        \end{proof}
+
+        \begin{prop}\label{extralect:prop3}
+            Пусть $X\ge0$. Если $EX < \infty$, то $Y:=E[X|\mathcal{G}]<\infty$ п.н. по мере $P$
+        \end{prop}
+        \begin{proof}
+            $EX = EX\mathbbm{1}_{\Omega} = EY\mathbbm{1}_{\Omega} = EY < \infty \Rightarrow Y < \infty$ п.н. [cвойство интеграла Лебега].
+        \end{proof}
+
+        \subsubsection{УМО для произвольных случайных величин}
+
+        \begin{definition}\label{extralect:def2}
+            Пусть $X:\Omega\to\R$ -- такая случайная величина, что найдутся $E[X^+|g]$ и $E[X^-|\mathcal{G}]$, конечные на событии вероятности 1. 
+            Тогда положим $E[X|\mathcal{G}]:=E[X^+|\mathcal{G}]-E[X^-|\mathcal{G}]$
+        \end{definition}
+
+        
+        \begin{theorem}\label{extralect:the1}
+            Пусть $\sigma$-алгебра $\mathcal{G}$ порождается разбиением  на события $C_n, n\in J$ -- конечное или счётное, $\forall$ $n\in J$ $P[C_n]>0$. Пусть ${E|X|<\infty}$. 
+            Тогда $E[X|\mathcal{G}]=\frac{EX\mathbbm{1}_{C_n}}{P[C_n]}$
+        \end{theorem}
+
+        \subsection{Свойства УМО}
+        \begin{lemma}
+            Пусть $X_1, \ldots, X_n \in L^1$ $a_1, \ldots, a_n \in \R$. Тогда 
+            \begin{eqnarray}
+            E\left[\left.\sum\limits_{k=1}^{n} a_k X_k \right|\mathcal{G}\right] = \sum\limits_{k=1}^{n} a_k E[X_k|\mathcal{G}]
+            \end{eqnarray}
+        \end{lemma}
+        \begin{proof}
+            $\sum\limits_{k=1}^{n} a_k X_k \in L^1$, поскольку $L^1$ -- линейное пространство. Ранее было показано, что $E[X_k|\mathcal{G}] \in L^1$. Рассмотрим произвольное событие $A \in \mathcal{G}$. \\
+            $E\left[\sum\limits_{k=1}^{n} a_k E[X_k|\mathcal{G}] \mathbbm{1}_{A}\right] = E\sum\limits_{k=1}^{n} a_k E[X_k\mathbbm{1}_{A}] = E\left[\sum\limits_{k=1}^{n} a_k X_k\mathbbm{1}_{A}\right]$
+        \end{proof}
+
+        \begin{lemma}
+            Пусть $X\in L^1, X\ge0$. Тогда $E[X|\mathcal{G}]\ge0$.\\
+            Если $X, Z \in L^1, Z \ge X$, то $E[Z|g] \ge E[X|\mathcal{G}]$.
+        \end{lemma}
+        \begin{proof}
+            $\forall A \in \mathcal{G}$ имеем $E[E[X|\mathcal{G}]\mathbbm{1}_{A}] = EX\mathbbm{1}_{A}\ge0$ \\
+            Рассмотрим $A_n:=\{E[X|\mathcal{G}]\ge -\frac{1}{n}\} \in \mathcal{G}$. $E[E[X|\mathcal{G}]\mathbbm{1}_{A_n}] \leqslant -\frac{1}{n} P[A_n] \Rightarrow P[E[X|\mathcal{G}]<0] = 0$
+        \end{proof}
+
+        \begin{lemma}
+            Пусть $X\in L^1$. Тогда $E[X|\mathcal{G}]\ge0$.
+        \end{lemma}
+        \begin{proof}
+           $|E[X|\mathcal{G}]| = |E[X^+|\mathcal{G}] - E[X^-|\mathcal{G}]|\leqslant E[X^+|\mathcal{G}] + E[X^-|\mathcal{G}] = E[X^+ + X^-|\mathcal{G}] = E[|X||\mathcal{G}]$
+        \end{proof}
+
+        \begin{lemma}
+            Пусть $X\in L^1$. Тогда $E[E[X|\mathcal{G}]] = EX$.
+        \end{lemma}
+        \begin{proof}
+           В условии 2 определения \ref{extralect:def1} возьмём $A=\Omega$.
+        \end{proof}
+
+        \begin{lemma}
+            Если $X$ изммеримо относительно $\mathcal{G}$, то $E[X|\mathcal{G}]=X$.
+        \end{lemma}
+        \begin{proof}
+           В таком случае, $X$ удовлетворяет определению \ref{extralect:def1}.
+        \end{proof}
+
+        \begin{lemma}
+            Пусть $X\in L^1, X$ не зависит от $\sigma$-алгебры $\mathcal{G}$. Тогда $E[X|\mathcal{G}] = EX$
+        \end{lemma}
+        \begin{proof}
+           Проверим определение. Первое условие выполняется, поскольку константа измерима относительно любой $\sigma$-алгебры.\\
+           Нужно проверить равенство $E[EX\mathbbm{1}_{A}] = EX\mathbbm{1}_{A}$. Поскольку $\sigma\{X\}$ и $\mathcal{G}$ независимы, $X$ и $\mathbbm{1}_{A}$ тоже независимы.
+           Тогда $EX\mathbbm{1}_{A} = EX E\mathbbm{1}_{A}$, отсюда следует равенство.
+        \end{proof}
+
+        \begin{lemma}
+            Пусть $ \mathcal{G}\subset \mathcal{F}$ и $X$ и $Z$ таковы, что $X\in L^1, XZ \in L^1$, причем $Z$ измерима относительно $\mathcal{G}$. Тогда $E[XZ|\mathcal{G}] = Z E[X|\mathcal{G}]$.
+        \end{lemma}
+
+        \begin{lemma}
+            $\mathcal{G}_1 \subset \mathcal{G}_2 \subset \mathcal{F}$. Пусть $X \in L^1$. Тогда $E[E[X|\mathcal{G}_2]|\mathcal{G}_1] = E[E[X|\mathcal{G}_1]|\mathcal{G}_2] = E[X|\mathcal{G}_1]$.
+        \end{lemma}
+
+        \subsection{Пример использования УМО}
+
+        \begin{lemma}
+            Пусть $U$ -- случайный вектор в $\R^d$, тогда любая случайная величина $Y$, измеримая относительно $\sigma\{U\}$, имеет вид ${Y=g(U)}$, 
+            где ${g: \R^d \to \R}$ -- борелевская функция. 
+        \end{lemma}
+
+        \begin{theorem}\label{extralect:the2}
+            Пусть $X, U$ -- независимые случайные векторы со значениями в $\R^n$ и $\R^m$, соответсвенно, где $n, m \in \N$. Тогда\\
+            $E[h(X,U)|U=u]=Eh(X,u)$, где $h: \R^{n+m} \to \R$ -- измеримая функция, такая что $Eh(X,U) < \infty$
+        \end{theorem}
+        Эта теорема позволяет вычислять УМО: если $X$ и $U$ - независимые случайные векторы или величины, достаточно найти $Eh(X, u) = F(u)$; тогда 
+        согласно теореме \ref{extralect:the2}, $E[h(X, U)|U] = F(U)$.
+
+        \begin{example}
+            $X_1, X_2, \ldots$ -- н.о.р. случайные величины, $V$ -- случайная величина. $V$ и $\{X_1, X_2, \ldots\}$ независимы. 
+            $EX_1=a$. $V\sim Pois[\lambda], \lambda > 0$. Вычислить $E[\sum\limits^{V} X_n]$ \\
+            \textit{Решение.} $E\left[\left.\sum\limits_{n=1}^{U} X_n\right|U=N\right]=E\left[\sum\limits_{n=1}^{N} X_n\right]=N EX_1=Na$\\
+            $E\left[\left. \sum\limits_{n=1}^{V} X_n \right|V\right] = Va$ \\
+            $E\left[\sum\limits_{n=1}^{V} X_n\right] = E\left[E\left[\left.\sum\limits_{n=1}^{V} X_n\right]\right|V\right] = aEV = \lambda a$
+        \end{example}
+
+        
+        \subsection{УМО для $X \in L^2$} 
+        Рассмотрим гильбертово пространство $H=L^2[\Omega, \mathcal{F}, P]$ со скалярным произведением $[X, W]=E[XW] \ X, W \in H$ и нормой 
+        $||X||:=[X,X]^\frac{1}{2}$. Возьмём подпространство $K:=L^2[\Omega, \mathcal{G}, P|_\mathcal{G}] \subset H$. По теореме об ортогональной проекции 
+        в гильбертовом пространстве $\forall X \in H \ \exists !$ элемент $Y \in K$, т.ч. $||X-Y|| = \inf_{V\in K} \text ||X- V||$, причём
+        $[X-Y, V]=0 \ \forall V\in K$. $Y$ является $\mathcal{G}$-измеримой величиной[как элемент $K$]. \\ $\forall A \in \mathcal{G} \ \mathbbm{1}_{A}\in K$, поэтому
+        $[X-Y, \mathbbm{1}_{A}]=0$, т.е. $EX\mathbbm{1}_{A}=EY\mathbbm{1}_{A}$. Таким образом, $E[X|\mathcal{G}]=Pr_{L^2[\Omega, \mathcal{G}, P|_\mathcal{G}]}X$.
+
+        \subsection{Теорема о нормальной корреляции}
+        \begin{theorem}\label{extralect:the3}
+            Пусть $(X, Y)$ -- гауссовский вектор в $\R^2$. Тогда 
+            \begin{eqnarray}
+                E[X|Y] = EX + \frac{\cov[X,Y]}{\var Y} [Y- EY]
+            \end{eqnarray}
+            Считаем $\frac{0}{0}:=0$.
+            \begin{eqnarray}
+                \delta = E[X-E[X|Y]]^2=\var X-\frac{\cov[X,Y]^2}{\var Y}
+            \end{eqnarray}
+        \end{theorem}
+
+        \begin{proof}
+            Найдём $c_0 \in \R: X-c_0 Y - E[X-c_0 Y] \perp Y$ в $L^2$.\\
+            $E[X-c_0 Y]-E[X-c_0 Y]Y=0 \Rightarrow EXY - c_0 Y^2 - EX EY + c_0 [EY]^2 = 0$ \\
+            т. е. $\cov[X,Y]=c_0 \var Y$. Следовательно, $c_0=\frac{\cov[X,Y]}{\var Y}$.\\
+            Если $\var Y = 0$, т.е. $Y=const$, то $X \perp Y \Rightarrow E[X|Y]=EX$ и теорема выполняется. \\
+            Рассмотрим случай $\var Y > 0$. $[X - c_0 Y - E[X - c_0 Y], Y]$ -- гауссовский вектор в $\R^2$ [поскольку получается из $[X,Y]$ линейным преобразованием].
+            Тогда $X - c_0 Y - E[X - c_0 Y]$ -- гауссовская случайная величина, не зависящая от $Y$. Таким образом, ${E[X - c_0 Y - E[X - c_0 Y]Y = 0}$.
+            \\$E[X-c_0 Y - E[X-c_0 Y]|Y]=E[X - c_0 Y - E[X - c_0 Y]=0$\\
+            $E[X|Y]- c_0 Y - EX + c_0 EY = 0 \Rightarrow E[X|Y] = EX + \frac{\cov[X,Y]}{\var Y} [Y- EY]$
+        \end{proof}
